@@ -27,6 +27,8 @@ module.exports = {
 			}
 		}
 		await interaction.reply(address) // testing if error occurs before here
+
+		/*
 		return
 		// Optional Config object, but defaults to demo api-key and eth-mainnet.
 		const settings = {
@@ -50,6 +52,7 @@ module.exports = {
 				{ name: '', value: value_list[0].floorPrice } // or value_list.nftMarketplace.floorPrice
 			)
 		channel.send({ embeds: [embed] });
+		*/
 	},
 };
 

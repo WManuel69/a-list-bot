@@ -2,14 +2,14 @@ const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashComman
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('floor_price')
+		.setName('floor_price2')
 		.setDescription('See the floor price for any project.')
 		.addStringOption(option => 
 			option.setName('input')
 				.setDescription('Contract address or URL name')),
 	async execute(interaction) {
 		const input = interaction.option.getString('input');
-		return interaction.reply(input)
+		await interaction.reply(input)
 		let address = "";
 		if (input.startsWith("0x") && input.length == 42) {
 			address = input;
@@ -26,7 +26,7 @@ module.exports = {
 				return interaction.reply("Error occurred")
 			}
 		}
-		return interaction.reply(address) // testing if error occurs before here
+		await interaction.reply(address) // testing if error occurs before here
 		// Optional Config object, but defaults to demo api-key and eth-mainnet.
 		const settings = {
 			apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.

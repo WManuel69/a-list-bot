@@ -1,0 +1,22 @@
+{
+  "name": "a-list-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0xManuel/a-list-bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0xManuel/a-list-bot/issues"
+  },
+  "homepage": "https://github.com/0xManuel/a-list-bot#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  }
+}

@@ -2,7 +2,7 @@ const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashComman
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('floor_price2')
+		.setName('floor_price')
 		.setDescription('See the floor price for any project.')
 		.addStringOption(option => 
 			option.setName('input')
@@ -23,10 +23,11 @@ module.exports = {
 
 			address = results.primary_asset_contracts.address;
 			} catch (error) {
-				return interaction.reply("Error occurred")
+				await interaction.reply("Error occurred")
 			}
 		}
 		await interaction.reply(address) // testing if error occurs before here
+		return
 		// Optional Config object, but defaults to demo api-key and eth-mainnet.
 		const settings = {
 			apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.

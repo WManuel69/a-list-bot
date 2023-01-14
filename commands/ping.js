@@ -2,14 +2,14 @@ const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashComman
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('floor_price2')
+		.setName('floor_price')
 		.setDescription('See the floor price for any project.')
 		.addStringOption(option => 
 			option.setName('input')
 				.setDescription('Contract address or URL name')),
 	async execute(interaction) {
 		const input = interaction.option.getString('input');
-		
+		return interaction.reply(input)
 		let address = "";
 		if (input.startsWith("0x") && input.length == 42) {
 			address = input;

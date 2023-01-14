@@ -2,7 +2,7 @@ const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashComman
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('floor_price')
+		.setName('floor_price2')
 		.setDescription('See the floor price for any project.')
 		.addStringOption(option => 
 			option.setName('input')

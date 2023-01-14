@@ -9,10 +9,12 @@ module.exports = {
 				.setDescription('Contract address or URL name')),
 	async execute(interaction) {
 		const input = interaction.option.getString('input');
+		
 		let address = "";
-		if (input.startsWith("0x") && input.length() == 42) {
+		if (input.startsWith("0x") && input.length == 42) {
 			address = input;
-		} else {	
+		} else {
+			try {
 			const query = new URLSearchParams({ input });
 			const result = await request(`https://api.opensea.io/api/v1/collection/${input}`);
 			const { list } = await result.body.json();
@@ -20,7 +22,11 @@ module.exports = {
 			const [results] = list;
 
 			address = results.primary_asset_contracts.address;
+			} catch (error) {
+				return interaction.reply("Error occurred")
+			}
 		}
+		return interaction.reply(address) // testing if error occurs before here
 		// Optional Config object, but defaults to demo api-key and eth-mainnet.
 		const settings = {
 			apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
@@ -40,7 +46,7 @@ module.exports = {
 			.setTitle('Floor price')
 			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 			.addFields(
-				{ name: '', value: value_list.nftMarketplace.floorPrice }
+				{ name: '', value: value_list[0].floorPrice } // or value_list.nftMarketplace.floorPrice
 			)
 		channel.send({ embeds: [embed] });
 	},

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/0xManuel/a-list-bot#readme",
   "dependencies": {
+    "alchemy-sdk": "^2.3.0",
     "discord.js": "^14.7.1",
     "fs": "^0.0.1-security",
     "path": "^0.12.7"

@@ -2,9 +2,9 @@ const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashComman
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('ping')
+		.setName('ding')
 		.setDescription('Replies with Pong!'),
 	async execute(interaction) {
-		await interaction.reply('Pong!');
+		await interaction.reply('dong!');
 	},
 };

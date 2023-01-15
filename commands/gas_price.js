@@ -10,7 +10,7 @@ module.exports = {
 		.setColor(0x0099FF)
 		.setTitle('Gas price')
 		.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
-		axios.get("https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=NQVJFVIWT2Q83ZZ2MCYYI54G1ZWY5TJT9X")
+		const resp = axios.get("https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=NQVJFVIWT2Q83ZZ2MCYYI54G1ZWY5TJT9X")
 			.then((response) => {embed
 				.addFields(
 					{ name: 'Slow', value: response.result.data.SafeGasPrice, inline: true },

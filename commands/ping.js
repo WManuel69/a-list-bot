@@ -16,7 +16,7 @@ module.exports = {
 			address = input;
 		} else {
 			try {
-				const resp = axios.get(`https://api.opensea.io/api/v1/collection/${input}`)
+				axios.get(`https://api.opensea.io/api/v1/collection/${input}`)
 				.then((res) => {
 					const embed = new EmbedBuilder()
 						.setColor(0x0099FF)
@@ -43,7 +43,7 @@ module.exports = {
 
 		const alchemy = new Alchemy(settings);
 
-		await alchemy.nft.getFloorPrice(address).then((d) => {
+		alchemy.nft.getFloorPrice(address).then((d) => {
 			const embed = new EmbedBuilder()
 			.setColor(0x0099FF)
 			.setTitle('Floor price')

@@ -10,10 +10,7 @@ module.exports = {
 	async execute(interaction) {
     const input = interaction.options.getString('input');
 		const address = interaction.options.get("input").value;
-		if (address.length != 42) {
-			await interaction.reply("Wrong address given")
-			return
-		}
+		
 
 		const { Alchemy, Utils } = require('alchemy-sdk');
 

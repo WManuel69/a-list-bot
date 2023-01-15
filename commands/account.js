@@ -1,4 +1,4 @@
-const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -52,7 +52,7 @@ module.exports = {
 				.setTitle(`Balance of ${output_address}`)
 				.setDescription(`${output_balance} ETH`)
 				.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
-		await interaction.channel.send({ embeds: [embed] });
+		await interaction.reply({ embeds: [embed] });
 	
 	},
 }

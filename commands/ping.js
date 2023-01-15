@@ -49,7 +49,7 @@ module.exports = {
 			.setTitle('Floor price')
 			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 			.addFields(
-				{ name: 'Floor Price:', value: d.openSea.floorPrice } // or value_list.nftMarketplace.floorPrice
+				{ name: 'Floor Price:', value: "hi" } // or value_list.nftMarketplace.floorPrice
 			);
 		interaction.reply({ embeds: [embed] });
 		});

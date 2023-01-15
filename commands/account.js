@@ -47,7 +47,18 @@ module.exports = {
 
 		const output_balance = balance.substr(0,5+balance.indexOf('.')-1); 
 
-		await interaction.reply(`Balance of ${output_address}: ${output_balance} ETH`);
+		const embed = new EmbedBuilder()
+				.setColor(0x0099FF)
+				.setTitle(`Balance of ${output_address}`)
+				.setDescription(`${output_balance} ETH`)
+				.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
+				.addFields(
+					{ name: 'Slow', value: d.result.SafeGasPrice,  },
+					{ name: 'Medium', value: d.result.ProposeGasPrice, inline: true },
+					{ name: 'Fast', value: d.result.FastGasPrice, inline: true },
+				);
+	
+		await interaction.channel.send({ embeds: [embed] });
 	
 	},
 }

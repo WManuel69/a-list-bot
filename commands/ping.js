@@ -23,7 +23,7 @@ module.exports = {
 						.setTitle('Floor price')
 						.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 						.addFields(
-							{ name: 'Floor Price:', value: res.data.collection.stats.floor_price }
+							{ name: 'Floor Price:', value: "hi" } // res.data.collection.stats.floor_price
 						);
 					interaction.reply({ embeds: [embed] });
 					return;
@@ -49,7 +49,7 @@ module.exports = {
 			.setTitle('Floor price')
 			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 			.addFields(
-				{ name: 'Floor Price:', value: "hi" } // or value_list.nftMarketplace.floorPrice
+				{ name: 'Floor Price:', value: "hi" } //d.openSea.floorPrice
 			);
 		interaction.reply({ embeds: [embed] });
 		});

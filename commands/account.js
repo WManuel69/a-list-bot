@@ -30,10 +30,8 @@ module.exports = {
 
 		// make the address prettier using three dots in the middle:
 		if (!address.endsWith(".eth")) {
-			let output_address = address.substr(0,4) + "..." + address.substr(38,41);
+			output_address = address.substr(0,4) + "..." + address.substr(38,41);
 		}
-		
-		
 		
 		let balance = 0;
 
@@ -49,7 +47,7 @@ module.exports = {
 		
 		let dot_placement = 0;
 
-		for(i = 0; i<balance.length; i++) {
+		for(let i = 0; i<balance.length; i++) {
 			if (balance.substr(i,i+1).localeCompare(".") == 0) {
 				dot_placement = i;
 				break;

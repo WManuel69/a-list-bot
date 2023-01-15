@@ -13,7 +13,7 @@ module.exports = {
 				.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 				.addFields(
 					{ name: 'Slow', value: d.result.SafeGasPrice, inline: true },
-					{ name: 'Medium', value: d.result.ProposeGasPrice, inline: true },
+					{ name: 'Normal', value: d.result.ProposeGasPrice, inline: true },
 					{ name: 'Fast', value: d.result.FastGasPrice, inline: true },
 				);
 	

@@ -26,7 +26,7 @@ module.exports = {
 							{ name: 'Floor Price:', value: res.data.collection.stats.floor_price }
 						);
 					interaction.reply({ embeds: [embed] });
-					
+					return;
 				}); 
 			} catch (error) {
 				await interaction.reply("Collection does not exist. Try again, otherwise use contract address")

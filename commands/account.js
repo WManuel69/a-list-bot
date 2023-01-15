@@ -6,7 +6,7 @@ module.exports = {
   		.setDescription('Check ETH wallet balance')
   		.addStringOption(option => 
     		option.setName('input')
-      	.setDescription('Wallet address')),
+      	.setDescription('Wallet address or ENS')),
 	async execute(interaction) {
     const input = interaction.options.getString('input');
 		const address = interaction.options.get("input").value;

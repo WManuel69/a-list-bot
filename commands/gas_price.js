@@ -14,8 +14,8 @@ module.exports = {
 			.addFields(
 				{ name: 'Slow', value: json.result.SafeGasPrice, inline: true },
 				{ name: 'Medium', value: json.result.ProposeGasPrice, inline: true },
-				{ name: 'Fast', value: json.result.FastGasPrice, inline: true }
+				{ name: 'Fast', value: json.result.FastGasPrice, inline: true },
 			)
-		await channel.send({ embeds: [embed] });
+		await interaction.send({ embeds: [embed] });
 	},
 }

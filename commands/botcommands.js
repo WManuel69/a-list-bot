@@ -11,7 +11,8 @@ module.exports = {
     const input = interaction.options.getString('test');
 		await interaction.reply(input);
 	},
-
+}
+module.exports = {
     data: new SlashCommandBuilder()
   		.setName('gas_price')
   		.setDescription('See the floor price for any project.')
@@ -22,7 +23,8 @@ module.exports = {
     const input = interaction.options.getString('test');
 		await interaction.reply(input);
 	},
-
+}
+module.exports = {
     data: new SlashCommandBuilder()
   		.setName('project_info')
   		.setDescription('See the floor price for any project.')
@@ -33,7 +35,8 @@ module.exports = {
     const input = interaction.options.getString('test');
 		await interaction.reply(input);
 	},
-
+}
+module.exports = {
     data: new SlashCommandBuilder()
   		.setName('project_volume')
   		.setDescription('See the floor price for any project.')
@@ -44,7 +47,8 @@ module.exports = {
     const input = interaction.options.getString('test');
 		await interaction.reply(input);
 	},
-
+}
+module.exports = {
     data: new SlashCommandBuilder()
   		.setName('project_trait')
   		.setDescription('See the floor price for any project.')

@@ -18,12 +18,13 @@ module.exports = {
 			try {
 				axios.get(`https://api.opensea.io/api/v1/collection/${input}`)
 				.then((res) => {
+					console.log(res.data.collection.stats.floor_price);
 					const embed = new EmbedBuilder()
 						.setColor(0x0099FF)
 						.setTitle('Floor price')
 						.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 						.addFields(
-							{ name: 'Floor Price:', value: `${res.data.collection.stats.floor_price} ETH` } // res.data.collection.stats.floor_price
+							{ name: 'Floor Price:', value: ` ETH` } // res.data.collection.stats.floor_price
 						);
 					interaction.reply({ embeds: [embed] });
 					return;

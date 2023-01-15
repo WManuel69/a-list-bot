@@ -5,7 +5,7 @@ module.exports = {
   		.setName('gas_price')
   		.setDescription('See the current gas prices'),
 	async execute(interaction) {
-		const data = await request("https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=NQVJFVIWT2Q83ZZ2MCYYI54G1ZWY5TJT9X");
+		const data = fetch("https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=NQVJFVIWT2Q83ZZ2MCYYI54G1ZWY5TJT9X").then((response) => response.json());
 		const json = JSON.parse(data);
 		const embed = new EmbedBuilder()
 			.setColor(0x0099FF)

@@ -44,17 +44,8 @@ module.exports = {
 		}
 
 		// make balance prettier
-		
-		let dot_placement = 0;
 
-		for(let i = 0; i<balance.length; i++) {
-			if (balance.substr(i,i+1) === ('.')) {
-				dot_placement = i;
-				break;
-			}
-		}		// not sure what i am doing wrong :/ 
-
-		const output_balance = balance.substr(0,5+dot_placement-1); 
+		const output_balance = balance.substr(0,5+balance.indexOf('.')-1); 
 
 		await interaction.reply(`Balance of ${output_address}: ${output_balance} ETH`);
 	

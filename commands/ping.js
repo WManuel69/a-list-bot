@@ -24,9 +24,9 @@ module.exports = {
 						.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 						.addFields(
 							{ name: 'Floor Price:', value: res.data.collection.stats.floor_price }
-						)
+						);
 					interaction.reply({ embeds: [embed] });
-					return;
+					
 				}); 
 			} catch (error) {
 				await interaction.reply("Collection does not exist. Try again, otherwise use contract address")
@@ -50,10 +50,10 @@ module.exports = {
 			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 			.addFields(
 				{ name: 'Floor Price:', value: d.openSea.floorPrice } // or value_list.nftMarketplace.floorPrice
-			)
+			);
 		interaction.reply({ embeds: [embed] });
 		});
-		return;
+		
 	
 		
 	},

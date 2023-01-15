@@ -10,11 +10,13 @@ module.exports = {
 	async execute(interaction) {
     const input = interaction.options.getString('input');
 		const address = interaction.options.get("input").value;
+
+		// could add a part where u ask if u provide an .eth address tho idk if needed
 		if (address.length != 42) {
 			await interaction.reply("Wrong address given")
 			return
 		}
-
+		
 		const { Alchemy, Utils } = require('alchemy-sdk');
 
 		const apiKey = "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE";
@@ -33,8 +35,17 @@ module.exports = {
 		balance = Utils.formatEther(balance);
 
 		// make balance prettier
+		
+		let dot_placement = 0;
 
-		const output_balance = balance.substr(0,5);
+		for(i = 0; i<balance.length; i++) {
+			if (balance.substr(i,i+1) === ".") {
+				dot_placement = i;
+				break;
+			}
+		}
+
+		const output_balance = balance.substr(0,5+dot_placement-1); 
 
 		await interaction.reply(`Balance of ${output_address}: ${output_balance} ETH`);
 	

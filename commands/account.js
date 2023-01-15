@@ -48,7 +48,7 @@ module.exports = {
 		let dot_placement = 0;
 
 		for(let i = 0; i<balance.length; i++) {
-			if (balance.substr(i,i+1).localeCompare(".") == 0) {
+			if (balance.substr(i,i+1) === ('.')) {
 				dot_placement = i;
 				break;
 			}

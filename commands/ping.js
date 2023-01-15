@@ -8,7 +8,7 @@ module.exports = {
 			option.setName('input')
 				.setDescription('Contract address or URL name')),
 	async execute(interaction) {
-		const input = interaction.option.getString('input');
+		const input = interaction.options.getString('input');
 		await interaction.reply(input)
 		let address = "";
 		if (input.startsWith("0x") && input.length == 42) {

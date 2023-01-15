@@ -13,8 +13,8 @@ module.exports = {
 		const resp = axios.get("https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=NQVJFVIWT2Q83ZZ2MCYYI54G1ZWY5TJT9X")
 			.then((response) => {embed
 				.addFields(
-					{ name: 'Slow', value: response.result.data.SafeGasPrice, inline: true },
-					{ name: 'Normal', value: response.result.data.ProposeGasPrice, inline: true },
+					{ name: 'Slow', value: response.data.result.SafeGasPrice, inline: true },
+					{ name: 'Normal', value: response.data.result.ProposeGasPrice, inline: true },
 					{ name: 'Fast', value: response.data.result.FastGasPrice, inline: true },
 				);}).then(interaction.reply({ embeds: [embed] }))
 	}

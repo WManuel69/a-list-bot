@@ -12,7 +12,7 @@ module.exports = {
 		const address = interaction.options.get("input").value;
 
 		// could add a part where u ask if u provide an .eth address tho idk if needed
-		if (address.length != 42) {
+		if (address.length != 42 && !address.endsWith(".eth")) {
 			await interaction.reply("Wrong address given")
 			return
 		}
@@ -29,10 +29,16 @@ module.exports = {
 		// make the address prettier using three dots in the middle:
 
 		const output_address = address.substr(0,4) + "..." + address.substr(38,41);
+		
+		let balance = 0;
 
-
-		let balance = await alchemy.core.getBalance(address, 'latest');
-		balance = Utils.formatEther(balance);
+		try {
+			balance = await alchemy.core.getBalance(address, 'latest');
+			balance = Utils.formatEther(balance);
+		} catch (error) {
+			await interaction.reply("ENS does not exist")
+			return;
+		}
 
 		// make balance prettier
 		
@@ -43,7 +49,7 @@ module.exports = {
 				dot_placement = i;
 				break;
 			}
-		}
+		}		// not sure what i am doing wrong :/ 
 
 		const output_balance = balance.substr(0,5+dot_placement-1); 
 

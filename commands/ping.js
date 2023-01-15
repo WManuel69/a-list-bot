@@ -27,9 +27,9 @@ module.exports = {
 			
 			
 		}
-		await interaction.reply(address);
-		return;
-		
+		await interaction.reply(address + " " + input);
+		/*
+
 		const settings = {
 			apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
 			network: Network.ETH_MAINNET, // Replace with your network.
@@ -49,7 +49,7 @@ module.exports = {
 				{ name: 'Floor Price:', value: response.openSea.floorPrice } // or value_list.nftMarketplace.floorPrice
 			)
 		interaction.reply({ embeds: [embed] });
-		
+		*/
 	},
 };
 

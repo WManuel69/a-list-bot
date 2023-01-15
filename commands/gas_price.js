@@ -15,6 +15,7 @@ module.exports = {
 					{ name: 'Slow', value: response.data.result.SafeGasPrice, inline: true },
 					{ name: 'Normal', value: response.data.result.ProposeGasPrice, inline: true },
 					{ name: 'Fast', value: response.data.result.FastGasPrice, inline: true },
-				);}).then(interaction.reply({ embeds: [embed] }))
+				);
+				interaction.reply({ embeds: [embed] })})
 	}
 }

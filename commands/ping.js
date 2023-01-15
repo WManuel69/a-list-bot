@@ -1,4 +1,6 @@
-const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder } = require('discord.js');
+const { default: axios } = require("axios");
+const { Network, Alchemy } = require("alchemy-sdk");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -14,15 +16,16 @@ module.exports = {
 			address = input;
 		} else {
 			try {
-			const result = await request(`https://api.opensea.io/api/v1/collection/${input}`);
-			const { list } = await result.body.json();
-			
-			const [results] = list;
-
-			address = results.primary_asset_contracts.address;
+				const resp = axios.get(`https://api.opensea.io/api/v1/collection/${input}`)
+				.then((res) => {
+					address = res.data.primary_asset_contracts.address;
+				}); 
 			} catch (error) {
 				await interaction.reply("Error occurred")
+				return;
 			}
+			
+			
 		}
 
 		const settings = {
@@ -32,7 +35,7 @@ module.exports = {
 
 		const alchemy = new Alchemy(settings);
 
-		const value = await alchemy.nft.getFloorPrice(address);
+		const response = await alchemy.nft.getFloorPrice(address);
 	
 
 
@@ -41,9 +44,9 @@ module.exports = {
 			.setTitle('Floor price')
 			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 			.addFields(
-				{ name: 'Floor Price:', value: value.floorPrice } // or value_list.nftMarketplace.floorPrice
+				{ name: 'Floor Price:', value: response.openSea.floorPrice } // or value_list.nftMarketplace.floorPrice
 			)
-		channel.send({ embeds: [embed] });
+		interaction.reply({ embeds: [embed] });
 		
 	},
 };

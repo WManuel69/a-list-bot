@@ -17,7 +17,7 @@ module.exports = {
 					{ name: 'Fast', value: d.result.FastGasPrice, inline: true },
 				);
 	
-			interaction.channel.send({ embeds: [embed] });} );
+			interaction.reply({ embeds: [embed] });} );
 		
 	},
 }

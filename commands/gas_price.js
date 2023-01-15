@@ -12,9 +12,9 @@ module.exports = {
 				.setTitle('Gas price')
 				.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 				.addFields(
-					{ name: 'Slow', value: response.data.result.SafeGasPrice, inline: true },
-					{ name: 'Normal', value: response.data.result.ProposeGasPrice, inline: true },
-					{ name: 'Fast', value: response.data.result.FastGasPrice, inline: true },
+					{ name: 'Slow', value: response.data.result.SafeGasPrice + "gwei", inline: true },
+					{ name: 'Normal', value: response.data.result.ProposeGasPrice + "gwei", inline: true },
+					{ name: 'Fast', value: response.data.result.FastGasPrice + "gwei", inline: true },
 				);
 				interaction.reply({ embeds: [embed] })})
 	}

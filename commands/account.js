@@ -24,10 +24,19 @@ module.exports = {
 
 		const alchemy = new Alchemy(settings);
 
-		// Get balance and format in terms of ETH
+		// make the address prettier using three dots in the middle:
+
+		const output_address = address.substr(0,4) + "..." + address.substr(38,41);
+
+
 		let balance = await alchemy.core.getBalance(address, 'latest');
 		balance = Utils.formatEther(balance);
-		await interaction.reply(`Balance of ${address}: ${balance} ETH`);
+
+		// make balance prettier
+
+		const output_balance = balance.substr(0,5);
+
+		await interaction.reply(`Balance of ${output_address}: ${output_balance} ETH`);
 	
 	},
 }

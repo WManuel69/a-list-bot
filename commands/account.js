@@ -39,7 +39,7 @@ module.exports = {
 		let dot_placement = 0;
 
 		for(i = 0; i<balance.length; i++) {
-			if (balance.substr(i,i+1) === ".") {
+			if (balance.substr(i,i+1) == ".") {
 				dot_placement = i;
 				break;
 			}

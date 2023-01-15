@@ -8,8 +8,7 @@ module.exports = {
     option.setName('test')
       .setDescription('Contract address or URL name')),
 	async execute(interaction) {
-    const input = interaction.option.getString('test');
-		await interaction.reply(input);
+		await interaction.reply("Hi");
 	},
 };
   

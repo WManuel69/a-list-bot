@@ -18,17 +18,23 @@ module.exports = {
 			try {
 				const resp = axios.get(`https://api.opensea.io/api/v1/collection/${input}`)
 				.then((res) => {
-					address = res.data.primary_asset_contracts.address;
+					const embed = new EmbedBuilder()
+						.setColor(0x0099FF)
+						.setTitle('Floor price')
+						.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
+						.addFields(
+							{ name: 'Floor Price:', value: res.data.collection.stats.floor_price }
+						)
+					interaction.reply({ embeds: [embed] });
+					return;
 				}); 
 			} catch (error) {
-				await interaction.reply("Error occurred")
+				await interaction.reply("Collection does not exist. Try again, otherwise use contract address")
 				return;
 			}
 			
 			
 		}
-		await interaction.reply(address + " " + input);
-		/*
 
 		const settings = {
 			apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
@@ -37,19 +43,19 @@ module.exports = {
 
 		const alchemy = new Alchemy(settings);
 
-		const response = await alchemy.nft.getFloorPrice(address);
-	
-
-
-		const embed = new EmbedBuilder()
+		await alchemy.nft.getFloorPrice(address).then((d) => {
+			const embed = new EmbedBuilder()
 			.setColor(0x0099FF)
 			.setTitle('Floor price')
 			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 			.addFields(
-				{ name: 'Floor Price:', value: response.openSea.floorPrice } // or value_list.nftMarketplace.floorPrice
+				{ name: 'Floor Price:', value: d.openSea.floorPrice } // or value_list.nftMarketplace.floorPrice
 			)
 		interaction.reply({ embeds: [embed] });
-		*/
+		});
+		return;
+	
+		
 	},
 };
 

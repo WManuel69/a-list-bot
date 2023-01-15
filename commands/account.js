@@ -26,12 +26,14 @@ module.exports = {
 
 		const alchemy = new Alchemy(settings);
 
+		let output_address = address;
+
 		// make the address prettier using three dots in the middle:
 		if (!address.endsWith(".eth")) {
-			const output_address = address.substr(0,4) + "..." + address.substr(38,41);
+			let output_address = address.substr(0,4) + "..." + address.substr(38,41);
 		}
 		
-		const output_address = address;
+		
 		
 		let balance = 0;
 

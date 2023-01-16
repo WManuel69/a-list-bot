@@ -1,4 +1,6 @@
-const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { default: axios } = require("axios");
+const { Network, Alchemy } = require("alchemy-sdk");
 
 module.exports = {
     data: new SlashCommandBuilder()

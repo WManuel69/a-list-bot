@@ -30,10 +30,10 @@ module.exports = {
 								{ name: `${resp.data.collection.primary_asset_contracts[0].name}`, value: "\u200B" }
 							)
 							.addFields(
-								{ name: 'Daily', value: `${(resp.data.collection.stats.one_day_volume).substr(0,5+(res.data.collection.stats.one_day_volume).indexOf(".")-1)}Ξ`, inline: true },
-								{ name: 'Weekly', value: `${(resp.data.collection.stats.seven).substr(0,5+(res.data.collection.stats.one_day_volume).indexOf(".")-1)}Ξ`, inline: true },
-								{ name: 'Monthly', value: `${(resp.data.collection.stats.thirty).substr(0,5+(res.data.collection.stats.one_day_volume).indexOf(".")-1)}Ξ`, inline: true },
-								{ name: 'All time', value: `${(resp.data.collection.stats.total_volume).substr(0,5+(res.data.collection.stats.one_day_volume).indexOf(".")-1)}Ξ`, inline: true },
+								{ name: 'Daily', value: `${(resp.data.collection.stats.one_day_volume).toString().substr(0,5+(res.data.collection.stats.one_day_volume).toString().indexOf(".")-1)}Ξ`, inline: true },
+								{ name: 'Weekly', value: `${(resp.data.collection.stats.seven_day_volume).toString().substr(0,5+(res.data.collection.stats.seven_day_volume).toString().indexOf(".")-1)}Ξ`, inline: true },
+								{ name: 'Monthly', value: `${(resp.data.collection.stats.thirty_day_volume).toString().substr(0,5+(res.data.collection.stats.thirty_day_volume).toString().indexOf(".")-1)}Ξ`, inline: true },
+								{ name: 'All time', value: `${(resp.data.collection.stats.total_volume).toString().substr(0,5+(res.data.collection.stats.total_volume).toString().indexOf(".")-1)}Ξ`, inline: true },
 							);
 						interaction.reply({ embeds: [embed] });}).catch((err) => interaction.reply("Wrong contract address"));
 				}).catch((err) => interaction.reply("Wrong contract address"));
@@ -50,10 +50,10 @@ module.exports = {
 									{ name: `${res.data.collection.primary_asset_contracts[0].name}`, value: "\u200B" }
 								)
 								.addFields(
-									{ name: 'Daily', value: `${(res.data.collection.stats.one_day_volume).substr(0,5+(res.data.collection.stats.one_day_volume).indexOf(".")-1)}Ξ`, inline: true },
-									{ name: 'Weekly', value: `${(res.data.collection.stats.seven).substr(0,5+(res.data.collection.stats.one_day_volume).indexOf(".")-1)}Ξ`, inline: true },
-									{ name: 'Monthly', value: `${(res.data.collection.stats.thirty).substr(0,5+(res.data.collection.stats.one_day_volume).indexOf(".")-1)}Ξ`, inline: true },
-									{ name: 'All time', value: `${(res.data.collection.stats.total_volume).substr(0,5+(res.data.collection.stats.one_day_volume).indexOf(".")-1)}Ξ`, inline: true },
+									{ name: 'Daily', value: `${(res.data.collection.stats.one_day_volume).toString().substr(0,5+(res.data.collection.stats.one_day_volume).toString().indexOf(".")-1)}Ξ`, inline: true },
+									{ name: 'Weekly', value: `${(res.data.collection.stats.seven_day_volume).toString().substr(0,5+(res.data.collection.stats.seven_day_volume).toString().indexOf(".")-1)}Ξ`, inline: true },
+									{ name: 'Monthly', value: `${(res.data.collection.stats.thirty_day_volume).toString().substr(0,5+(res.data.collection.stats.thirty_day_volume).toString().indexOf(".")-1)}Ξ`, inline: true },
+									{ name: 'All time', value: `${(res.data.collection.stats.total_volume).toString().substr(0,5+(res.data.collection.stats.total_volume).toString().indexOf(".")-1)}Ξ`, inline: true },
 								);
 							interaction.reply({ embeds: [embed] });
 							return;

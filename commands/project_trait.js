@@ -7,31 +7,80 @@ module.exports = {
   		.setName('project_trait')
   		.setDescription('See the floor price for any project.')
   		.addStringOption(option => 
-    		option.setName('input')
-      	.setDescription('Contract address or URL name')),
+    		option
+				.setName('Address')
+      			.setDescription('Contract address or URL name'))
+		.addStringOption(option => 
+			option
+				.setName("TokenID")
+				.setDescription("Token ID of the NFT")),
 	async execute(interaction) {
-		const input = interaction.options.get('input').value;
-		let embed = new EmbedBuilder()
-			.setColor(0x0099FF)
-			.setTitle('Balance of you')
-			.setDescription(`$ ETH`)
-			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
-		axios(
-				{
-					method: "get",
-					headers: { "X-API-KEY": "" },
-					url: 'https://api.opensea.io/api/v1/asset/0x8a90cab2b38dba80c64b7734e58ee1db38b8992e/7463'
-				}
-		)
-			.then((res) => {
-				for (let i = 0; i < res.data.traits.length; i++) {
-					embed.addFields(
-						{ name: res.data.traits[i].trait_type, value: res.data.traits[i].value }
-					)
-				}
-				interaction.reply({ embeds: [embed] });
-		});
-		
+		const contractAddress = interaction.options.get('Address').value;
+		const tokenID = interaction.options.get('TokenID').value;
+		if (contractAddress.startsWith("0x") && address.length == 42) {			
+			let embed = new EmbedBuilder()
+				.setColor(0x0099FF)
+				.setTitle('Rarity of NFT')
+				.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
+			axios(
+					{
+						method: "get",
+						headers: { "X-API-KEY": "" },
+						url: `https://api.opensea.io/api/v1/asset/${contractAddress}/${tokenID}`
+					}
+			)
+				.then((res) => {
+					for (let i = 0; i < res.data.traits.length; i++) {
+						embed.addFields(
+							{ name: res.data.traits[i].trait_type, value: res.data.traits[i].value, inline: true }
+						);
+					}
+					try {
+						embed.addFields(
+							{ name: "Rank", value: res.data.rarity_data.rank}
+						);
+					} catch (err) {
+						embed.addFields(
+							{ name: "Rank", value: "Rank is not currently available"}
+						);
+					}
+					interaction.reply({ embeds: [embed] });
+				}).catch((err) => {
+					interaction.reply("Traits aren't currently available")
+				})
+		} else {
+			axios.get(
+				`https://api.opensea.io/api/v1/collection/${contractAddress}`
+			)
+				.then((addy) => {
+					axios(
+						{
+							method: "get",
+							headers: { "X-API-KEY": "" },
+							url: `https://api.opensea.io/api/v1/asset/${addy.data.collection.primary_asset_contracts[0].address}/${tokenID}`
+						}
+				)
+					.then((res) => {
+						for (let i = 0; i < res.data.traits.length; i++) {
+							embed.addFields(
+								{ name: res.data.traits[i].trait_type, value: res.data.traits[i].value, inline: true }
+							);
+						}
+						try {
+							embed.addFields(
+								{ name: "Rank", value: res.data.rarity_data.rank}
+							);
+						} catch (err) {
+							embed.addFields(
+								{ name: "Rank", value: "Rank is not currently available"}
+							);
+						}
+						interaction.reply({ embeds: [embed] });
+					}).catch((err) => {
+						interaction.reply("Traits aren't currently available")
+					})
+				})
+		}
 		
 	},
 };

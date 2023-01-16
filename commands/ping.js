@@ -27,7 +27,7 @@ module.exports = {
 						.setTitle('Floor price')
 						.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 						.addFields(
-							{ name: `${resp.data.collection.primary_asset_contracts.name}`, value: `${d.openSea.floorPrice}Ξ` }
+							{ name: `${resp.data.collection.primary_asset_contracts[0].name}`, value: `${d.openSea.floorPrice}Ξ` }
 						);
 					interaction.reply({ embeds: [embed] });})
 			});
@@ -41,7 +41,7 @@ module.exports = {
 							.setTitle('Floor price')
 							.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 							.addFields(
-								{ name: `${res.data.collection.primary_asset_contracts.name}`, value: `${res.data.collection.stats.floor_price}Ξ` }
+								{ name: `${res.data.collection.primary_asset_contracts[0].name}`, value: `${res.data.collection.stats.floor_price}Ξ` }
 							);
 						interaction.reply({ embeds: [embed] });
 						return;

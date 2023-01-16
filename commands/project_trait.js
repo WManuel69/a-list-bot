@@ -17,7 +17,7 @@ module.exports = {
 	async execute(interaction) {
 		const contractAddress = interaction.options.get('Address').value;
 		const tokenID = interaction.options.get('TokenID').value;
-		if (contractAddress.startsWith("0x") && address.length == 42) {			
+		if (contractAddress.startsWith("0x") && contractAddress.length == 42) {			
 			let embed = new EmbedBuilder()
 				.setColor(0x0099FF)
 				.setTitle('Rarity of NFT')

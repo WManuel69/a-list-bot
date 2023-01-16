@@ -11,12 +11,14 @@ module.exports = {
       	.setDescription('Contract address or URL name')),
 	async execute(interaction) {
 		const input = interaction.options.get('input').value;
-		const embed = new EmbedBuilder()
+		let embed = new EmbedBuilder()
 			.setColor(0x0099FF)
 			.setTitle('Balance of you')
 			.setDescription(`$ ETH`)
 			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
-		let updated = EmbedBuilder.from(embed.embeds[0]);
-		await interaction.reply(updated); 
+		embed.addFields(
+			 { name: "hello", value: input },
+		);
+		await interaction.reply({ embeds: [embed] }); 
 	},
 };

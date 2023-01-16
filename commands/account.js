@@ -8,7 +8,7 @@ module.exports = {
     		option.setName('input')
       	.setDescription('Wallet address or ENS')),
 	async execute(interaction) {
-    const input = interaction.options.getString('input');
+
 		const address = interaction.options.get("input").value;
 
 		// could add a part where u ask if u provide an .eth address tho idk if needed

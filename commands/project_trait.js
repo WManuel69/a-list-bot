@@ -8,15 +8,15 @@ module.exports = {
   		.setDescription('See the floor price for any project.')
   		.addStringOption(option => 
     		option
-				.setName('Address')
+				.setName('address')
       			.setDescription('Contract address or URL name'))
 		.addStringOption(option => 
 			option
-				.setName("TokenID")
+				.setName("tokenid")
 				.setDescription("Token ID of the NFT")),
 	async execute(interaction) {
-		const contractAddress = interaction.options.get('Address').value;
-		const tokenID = interaction.options.get('TokenID').value;
+		const contractAddress = interaction.options.get('address').value;
+		const tokenID = interaction.options.get('tokenid').value;
 		if (contractAddress.startsWith("0x") && contractAddress.length == 42) {			
 			let embed = new EmbedBuilder()
 				.setColor(0x0099FF)

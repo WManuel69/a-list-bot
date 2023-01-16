@@ -29,8 +29,8 @@ module.exports = {
 						.addFields(
 							{ name: `${resp.data.collection.primary_asset_contracts[0].name}`, value: `${d.openSea.floorPrice}Ξ` }
 						);
-					interaction.reply({ embeds: [embed] });})
-			});
+					interaction.reply({ embeds: [embed] });}).catch((err) => interaction.reply("Wrong contract address"));
+			}).catch((err) => interaction.reply("Wrong contract address"));
 		} else {
 			try {
 				axios.get(`https://api.opensea.io/api/v1/collection/${input}`)

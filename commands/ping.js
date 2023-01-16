@@ -20,14 +20,16 @@ module.exports = {
 			const alchemy = new Alchemy(settings);
 
 			alchemy.nft.getFloorPrice(input).then((d) => {
-				const embed = new EmbedBuilder()
-					.setColor(0x0099FF)
-					.setTitle('Floor price')
-					.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
-					.addFields(
-						{ name: 'Floor Price:', value: `${d.openSea.floorPrice}Ξ` }
-					);
-				interaction.reply({ embeds: [embed] });
+				let collectionName = d.openSea.collectionUrl.substr(d.openSea.collectionUrl.indexOf("collection/")+11,d.openSea.collectionUrl.length);
+				axios.get(`https://api.opensea.io/api/v1/collection/${collectionName}`).then((resp) => {
+					const embed = new EmbedBuilder()
+						.setColor(0x0099FF)
+						.setTitle('Floor price')
+						.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
+						.addFields(
+							{ name: `${resp.data.collection.primary_asset_contracts.name}`, value: `${d.openSea.floorPrice}Ξ` }
+						);
+					interaction.reply({ embeds: [embed] });})
 			});
 		} else {
 			try {
@@ -39,10 +41,14 @@ module.exports = {
 							.setTitle('Floor price')
 							.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 							.addFields(
-								{ name: 'Floor Price:', value: `${res.data.collection.stats.floor_price}Ξ` } 
+								{ name: `${res.data.collection.primary_asset_contracts.name}`, value: `${res.data.collection.stats.floor_price}Ξ` }
 							);
 						interaction.reply({ embeds: [embed] });
 						return;
+					})
+					.catch((err) => {
+						interaction.reply(
+							"Collection does not exist. Try again, otherwise use contract address");
 					});
 			} catch (error) {
 				await interaction.reply("Collection does not exist. Try again, otherwise use contract address")

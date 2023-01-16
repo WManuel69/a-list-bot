@@ -5,7 +5,7 @@ const { Network, Alchemy } = require("alchemy-sdk");
 module.exports = {
     data: new SlashCommandBuilder()
   		.setName('project_volume')
-  		.setDescription('See the floor price for any project.')
+  		.setDescription('See the volume for any project.')
   		.addStringOption(option => 
     		option.setName('input')
       	.setDescription('Contract address or URL name')),
@@ -24,16 +24,16 @@ module.exports = {
 					axios.get(`https://api.opensea.io/api/v1/collection/${collectionName}`).then((resp) => {
 						const embed = new EmbedBuilder()
 							.setColor(0x0099FF)
-							.setTitle('Floor price')
+							.setTitle('Project volume')
 							.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 							.addFields(
-								{ name: `${resp.data.collection.primary_asset_contracts[0].name}`, value: `` }
+								{ name: `${resp.data.collection.primary_asset_contracts[0].name}`, value: "\u200B" }
 							)
 							.addFields(
 								{ name: 'Daily', value: `${resp.data.collection.stats.one_day_volume}Ξ`, inline: true },
 								{ name: 'Weekly', value: `${resp.data.collection.stats.seven_day_volume}Ξ`, inline: true },
 								{ name: 'Monthly', value: `${resp.data.collection.stats.thirty_day_volume}Ξ`, inline: true },
-								{ name: 'All time', value: `${resp.data.collection.stats.total_volume}Ξ`, inline: true }
+								{ name: 'All time', value: `${resp.data.collection.stats.total_volume}Ξ`, inline: true },
 							);
 						interaction.reply({ embeds: [embed] });}).catch((err) => interaction.reply("Wrong contract address"));
 				}).catch((err) => interaction.reply("Wrong contract address"));
@@ -44,16 +44,16 @@ module.exports = {
 							console.log(res.data.collection.stats.floor_price);
 							const embed = new EmbedBuilder()
 								.setColor(0x0099FF)
-								.setTitle('Floor price')
+								.setTitle('Project volume')
 								.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 								.addFields(
-									{ name: `${res.data.collection.primary_asset_contracts[0].name}`, value: `` }
+									{ name: `${res.data.collection.primary_asset_contracts[0].name}`, value: "\u200B" }
 								)
 								.addFields(
 									{ name: 'Daily', value: `${res.data.collection.stats.one_day_volume}Ξ`, inline: true },
 									{ name: 'Weekly', value: `${res.data.collection.stats.seven_day_volume}Ξ`, inline: true },
 									{ name: 'Monthly', value: `${res.data.collection.stats.thirty_day_volume}Ξ`, inline: true },
-									{ name: 'All time', value: `${res.data.collection.stats.total_volume}Ξ`, inline: true }
+									{ name: 'All time', value: `${res.data.collection.stats.total_volume}Ξ`, inline: true },
 								);
 							interaction.reply({ embeds: [embed] });
 							return;

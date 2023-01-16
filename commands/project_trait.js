@@ -79,7 +79,7 @@ module.exports = {
 					}).catch((err) => {
 						interaction.reply("Traits aren't currently available")
 					});
-				});
+				}).catch((err) => interaction.reply("Collection does not exist. Try again, otherwise use contract address"));
 		}
 		
 	},

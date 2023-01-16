@@ -20,7 +20,7 @@ module.exports = {
 		if (contractAddress.startsWith("0x") && contractAddress.length == 42) {			
 			let embed = new EmbedBuilder()
 				.setColor(0x0099FF)
-				.setTitle('Rarity of NFT')
+				.setTitle('Traits of NFT')
 				.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
 			axios(
 					{
@@ -37,7 +37,7 @@ module.exports = {
 					}
 					try {
 						embed.addFields(
-							{ name: "Rank", value: res.data.rarity_data.rank}
+							{ name: "Rank", value: `${res.data.rarity_data.rank}` }
 						);
 					} catch (err) {
 						embed.addFields(
@@ -68,7 +68,7 @@ module.exports = {
 						}
 						try {
 							embed.addFields(
-								{ name: "Rank", value: res.data.rarity_data.rank}
+								{ name: "Rank", value: `${res.data.rarity_data.rank}`}
 							);
 						} catch (err) {
 							embed.addFields(

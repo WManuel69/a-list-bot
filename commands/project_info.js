@@ -22,7 +22,7 @@ module.exports = {
 					axios.get(`https://api.opensea.io/api/v1/collection/${collectionName}`).then((resp) => {
 						const embed = new EmbedBuilder()
 							.setColor(0x0099FF)
-							.setTitle('Floor price')
+							.setTitle('Project info')
 							.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 							.addFields(
 								{ name: `${resp.data.collection.primary_asset_contracts[0].name}`, value: `${resp.data.collection.description}` }
@@ -36,7 +36,7 @@ module.exports = {
 							console.log(res.data.collection.stats.floor_price);
 							const embed = new EmbedBuilder()
 								.setColor(0x0099FF)
-								.setTitle('Floor price')
+								.setTitle('Project info')
 								.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
 								.addFields(
 									{ name: `${res.data.collection.primary_asset_contracts[0].name}`, value: `${res.data.collection.description}` }

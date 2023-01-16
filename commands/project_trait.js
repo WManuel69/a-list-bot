@@ -29,9 +29,9 @@ module.exports = {
 						{ name: res.data.traits[i].trait_type, value: res.data.traits[i].value }
 					)
 				}
-		
+				interaction.reply({ embeds: [embed] });
 		});
 		
-		await interaction.reply({ embeds: [embed] }); 
+		
 	},
 };

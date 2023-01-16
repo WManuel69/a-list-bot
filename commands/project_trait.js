@@ -16,9 +16,22 @@ module.exports = {
 			.setTitle('Balance of you')
 			.setDescription(`$ ETH`)
 			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
-		embed.addFields(
-			 { name: "hello", value: input },
-		);
+		axios(
+				{
+					method: "get",
+					headers: { "X-API-KEY": "" },
+					url: 'https://api.opensea.io/api/v1/asset/0x8a90cab2b38dba80c64b7734e58ee1db38b8992e/7463'
+				}
+		)
+			.then((res) => {
+				for (let i = 0; i < res.data.traits.length; i++) {
+					embed.addFields(
+						{ name: res.data.traits[i].trait_type, value: res.data.traits[i].value }
+					)
+				}
+		
+		});
+		
 		await interaction.reply({ embeds: [embed] }); 
 	},
 };

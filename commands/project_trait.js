@@ -46,8 +46,8 @@ module.exports = {
 					}
 					interaction.reply({ embeds: [embed] });
 				}).catch((err) => {
-					interaction.reply("Traits aren't currently available")
-				})
+					interaction.reply("Traits aren't currently available");
+				});
 		} else {
 			axios.get(
 				`https://api.opensea.io/api/v1/collection/${contractAddress}`
@@ -78,8 +78,8 @@ module.exports = {
 						interaction.reply({ embeds: [embed] });
 					}).catch((err) => {
 						interaction.reply("Traits aren't currently available")
-					})
-				})
+					});
+				});
 		}
 		
 	},

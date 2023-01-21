@@ -12,7 +12,7 @@ module.exports = {
 
 		const address = interaction.options.get("input").value;
 
-		// could add a part where u ask if u provide an .eth address tho idk if needed
+		
 		if (address.length != 42 && !address.endsWith(".eth")) {
 			await interaction.reply("Wrong address given")
 			return

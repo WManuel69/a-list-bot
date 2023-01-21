@@ -8,7 +8,7 @@ const client = new MongoClient(url);
 module.exports = {
     data: new SlashCommandBuilder()
   		.setName('remove')
-  		.setDescription('All collections you want to be notified about')
+  		.setDescription('Remove alert from your list')
           .addStringOption(option => 
     		option
 				.setName('address')
@@ -32,7 +32,7 @@ module.exports = {
                 contractAddress: contractAddress
             } );
             
-            interaction.reply("Collection removed!")
+            await interaction.reply("Collection removed!")
             
         } catch (err) {
             interaction.reply("error occurred");

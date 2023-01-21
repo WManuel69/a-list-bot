@@ -20,7 +20,7 @@ module.exports = {
 				.setDescription("Format: 0.5")),
 	async execute(interaction) {
 		const contractAddress = interaction.options.get('address').value;
-		const increment = interaction.options.get('increment').value;
+		const increment = interaction.options.getNumber('increment');
 		const dbName = "Alist";
         const user = interaction.user.id;
         if (contractAddress.startsWith("0x") && contractAddress.length == 42) {
@@ -43,10 +43,10 @@ module.exports = {
                         // Construct a document                                                                                                                                                              
                         let personDocument = {
                             "contractAddress": contractAddress,
-                            "increment": increment,
+                            "increment": increment+0,
                             "userID": user,
                             "collectionName": resp.data.collection.primary_asset_contracts[0].name,
-                            "currentPrice": d.openSea.floorPrice
+                            "currentPrice": `${d.openSea.floorPrice*1.0}`
                         }
                         col.insertOne(personDocument);
                         

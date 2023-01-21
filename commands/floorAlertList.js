@@ -7,7 +7,7 @@ const client = new MongoClient(url);
 
 module.exports = {
     data: new SlashCommandBuilder()
-  		.setName('List')
+  		.setName('list')
   		.setDescription('Get pinged if the collection is moved by a fixed increment.'),
 	async execute(interaction) {
 		const dbName = "Alist"

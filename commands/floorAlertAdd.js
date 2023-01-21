@@ -45,18 +45,19 @@ module.exports = {
                             "contractAddress": contractAddress,
                             "increment": increment,
                             "userID": user,
-                            "collectionName": res.data.collection.primary_asset_contracts[0].name,
+                            "collectionName": resp.data.collection.primary_asset_contracts[0].name,
                             "currentPrice": d.openSea.floorPrice
                         }
                         col.insertOne(personDocument);
                         
                     } catch (err) {
-                        interaction.reply("error occurred")
+                        interaction.reply("error occurred");
+                        return;
                     }
                 
                     finally {
                        client.close();
-                       interaction.reply("Collection added!")
+                       interaction.reply("Collection added!");
                    }
 
 
@@ -83,14 +84,14 @@ module.exports = {
                             col.insertOne(personDocument);
                             
                         } catch (err) {
-                            interaction.reply("error occurred")
+                            interaction.reply("error occurred");
+                            return;
                         }
                     
                         finally {
                            client.close();
-                           interaction.reply("Collection added!")
-                
-                       }
+                           interaction.reply("Collection added!");
+                        }
 					
 						
 					})

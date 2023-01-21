@@ -17,12 +17,12 @@ module.exports = {
                 
 		.addStringOption(option => 
 			option
-				.setName("Change")
+				.setName("change")
 				.setDescription("Format: 0.5").setRequired(true))
                 ,
 	async execute(interaction) {
 		const contractAddress = interaction.options.get('address').value;
-		const increment = interaction.options.get('increment').value;
+		const increment = interaction.options.get('change').value;
 		const dbName = "Alist";
         const user = interaction.user.id;
         if (contractAddress.startsWith("0x") && contractAddress.length == 42) {

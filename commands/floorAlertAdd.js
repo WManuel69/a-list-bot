@@ -17,7 +17,7 @@ module.exports = {
                 
 		.addStringOption(option => 
 			option
-				.setName("increment")
+				.setName("Change")
 				.setDescription("Format: 0.5").setRequired(true))
                 ,
 	async execute(interaction) {

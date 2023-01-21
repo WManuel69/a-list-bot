@@ -21,9 +21,9 @@ module.exports = {
                 .setTitle('My alerts')
                 .setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
                 
-            const entries =  col.find( { userID: "143444705009598464" });
+            const entries =  col.find( { userID: interaction.user.id });
             await entries.forEach((item) => {
-                embed.addFields({ name: item.collectionName, value: "Increment: " + item.increment + " ETH" })
+                embed.addFields({ name: item.collectionName, value: "Change: " + item.increment + " ETH" })
             });
                 
             

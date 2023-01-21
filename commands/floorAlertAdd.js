@@ -44,7 +44,9 @@ module.exports = {
                         let personDocument = {
                             "contractAddress": contractAddress,
                             "increment": increment,
-                            "userID": user
+                            "userID": user,
+                            "collectionName": res.data.collection.primary_asset_contracts[0].name,
+                            "currentPrice": d.openSea.floorPrice
                         }
                         col.insertOne(personDocument);
                         
@@ -58,7 +60,7 @@ module.exports = {
                    }
 
 
-					interaction.reply({ embeds: [embed] });}).catch((err) => interaction.reply("Wrong contract address"));
+                }).catch((err) => interaction.reply("Wrong contract address"));
 			}).catch((err) => interaction.reply("Wrong contract address"));
 		} else {
 			try {
@@ -74,7 +76,9 @@ module.exports = {
                             let personDocument = {
                                 "contractAddress": res.data.collection.primary_asset_contracts[0].address,
                                 "increment": increment,
-                                "userID": user
+                                "userID": user,
+                                "collectionName": res.data.collection.primary_asset_contracts[0].name,
+                                "currentPrice": res.data.collection.stats.floor_price
                             }
                             col.insertOne(personDocument);
                             

@@ -23,7 +23,7 @@ module.exports = {
 		const increment = interaction.options.get('increment').value;
 		const dbName = "Alist";
         const user = interaction.user.id;
-        if (input.startsWith("0x") && input.length == 42) {
+        if (contractAddress.startsWith("0x") && contractAddress.length == 42) {
 			const settings = {
 				apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
 				network: Network.ETH_MAINNET, // Replace with your network.

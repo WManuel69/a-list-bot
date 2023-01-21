@@ -8,8 +8,9 @@ module.exports = {
   		.setDescription('Check info about project.')
   		.addStringOption(option => 
     		option.setName('input')
-      	.setDescription('Contract address or URL name'))
-		.setRequired(true),
+      	.setDescription('Contract address or URL name')
+		.setRequired(true))
+		,
 		  async execute(interaction) {
 			const input = interaction.options.get("input").value;
 			if (input.startsWith("0x") && input.length == 42) {

@@ -13,13 +13,13 @@ module.exports = {
   		.addStringOption(option => 
     		option
 				.setName('address')
-      			.setDescription('Contract address or URL name'))
-                .setRequired(true)
+      			.setDescription('Contract address or URL name').setRequired(true))
+                
 		.addStringOption(option => 
 			option
 				.setName("increment")
-				.setDescription("Format: 0.5"))
-                .setRequired(true),
+				.setDescription("Format: 0.5").setRequired(true))
+                ,
 	async execute(interaction) {
 		const contractAddress = interaction.options.get('address').value;
 		const increment = interaction.options.get('increment').value;

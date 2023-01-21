@@ -9,13 +9,14 @@ module.exports = {
   		.addStringOption(option => 
     		option
 				.setName('address')
-      			.setDescription('Contract address or URL name'))
-		.setRequired(true)
+      			.setDescription('Contract address or URL name')
+				.setRequired(true))
 		.addStringOption(option => 
 			option
 				.setName("tokenid")
-				.setDescription("Token ID of the NFT"))
-		.setRequired(true),
+				.setDescription("Token ID of the NFT")
+				.setRequired(true))
+		,
 	async execute(interaction) {
 		const contractAddress = interaction.options.get('address').value;
 		const tokenID = interaction.options.get('tokenid').value;

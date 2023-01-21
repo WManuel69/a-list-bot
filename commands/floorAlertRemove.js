@@ -12,8 +12,11 @@ module.exports = {
           .addStringOption(option => 
     		option
 				.setName('address')
-      			.setDescription('Contract address or URL name').setRequired(true))
-                
+      			.setDescription('Contract address'))
+          .addStringOption(option => 
+    		option
+				.setName('collection')
+      			.setDescription('Collection name'))        
 		.addStringOption(option => 
 			option
 				.setName("change")
@@ -22,15 +25,12 @@ module.exports = {
 		const dbName = "Alist"
         const contractAddress = interaction.options.get('address').value;
 		const increment = interaction.options.get('change').value;
+        const collectionName = interaction.options.get('collection').value;
         try {
             client.connect();
             const db = client.db(dbName);
             const col = db.collection("contractAddresses");   
-            col.deleteOne( {
-                userID:  interaction.user.id,
-                increment: increment,
-                contractAddress: contractAddress
-            } );
+            col.deleteOne({  $and: [{ userID:  `${interaction.user.id}` }, {increment: increment} ], $or: [{ contractAddress: contractAddress }, {collectionName: collectionName}]});
             
             await interaction.reply("Collection removed!")
             

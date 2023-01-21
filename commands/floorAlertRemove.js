@@ -26,7 +26,7 @@ module.exports = {
             client.connect();
             const db = client.db(dbName);
             const col = db.collection("contractAddresses");   
-            const entries =  col.deleteOne( {
+            col.deleteOne( {
                 userID:  interaction.user.id,
                 increment: increment,
                 contractAddress: contractAddress

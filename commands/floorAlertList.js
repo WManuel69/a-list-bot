@@ -1,4 +1,4 @@
-const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder } = require('discord.js');
 const { default: axios } = require("axios");
 const { Network, Alchemy } = require("alchemy-sdk");
 const {MongoClient} = require('mongodb');
@@ -9,7 +9,6 @@ module.exports = {
     data: new SlashCommandBuilder()
   		.setName('List')
   		.setDescription('Get pinged if the collection is moved by a fixed increment.'),
-  		
 	async execute(interaction) {
 		const dbName = "Alist"
         try {
@@ -26,7 +25,7 @@ module.exports = {
             for(let i = 0; i<entries.length; i++) {
                 embed.addFields({ name: entries.collectionName, value: "Increment:" + entries.increment + "ETH"})
             }
-            interaction.reply({ embeds: [embed] });
+            await interaction.reply({ embeds: [embed] });
             
         } catch (err) {
             interaction.reply("error occurred");

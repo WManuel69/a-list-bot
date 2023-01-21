@@ -7,7 +7,7 @@ const client = new MongoClient(url);
 
 module.exports = {
     data: new SlashCommandBuilder()
-  		.setName('add_collection')
+  		.setName('List')
   		.setDescription('Get pinged if the collection is moved by a fixed increment.'),
   		
 	async execute(interaction) {
@@ -24,7 +24,7 @@ module.exports = {
                 
             const entries =  col.find( { userID: interaction.user.id})
             for(let i = 0; i<entries.length; i++) {
-                embed.addFields({ name: entries.collectionName })
+                embed.addFields({ name: entries.collectionName, value: "Increment:" + entries.increment + "ETH"})
             }
             interaction.reply({ embeds: [embed] });
             

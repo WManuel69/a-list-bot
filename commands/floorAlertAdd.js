@@ -1,4 +1,4 @@
-const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder } = require('discord.js');
 const { default: axios } = require("axios");
 const { Network, Alchemy } = require("alchemy-sdk");
 const {MongoClient} = require('mongodb');
@@ -21,7 +21,7 @@ module.exports = {
 	async execute(interaction) {
 		const contractAddress = interaction.options.get('address').value;
 		const increment = interaction.options.get('increment').value;
-		const dbName = "Alist"
+		const dbName = "Alist";
         const user = interaction.user.id;
         if (input.startsWith("0x") && input.length == 42) {
 			const settings = {

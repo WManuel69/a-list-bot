@@ -23,7 +23,7 @@ module.exports = {
                 
             const entries =  col.find( { userID: "143444705009598464" });
             await entries.forEach((item) => {
-                embed.addFields({ name: item.collectionName, value: "Increment:" + item.increment + "ETH" })
+                embed.addFields({ name: item.collectionName, value: "Increment: " + item.increment + " ETH" })
             });
                 
             

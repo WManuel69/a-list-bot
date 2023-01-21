@@ -30,7 +30,7 @@ module.exports = {
             client.connect();
             const db = client.db(dbName);
             const col = db.collection("contractAddresses");   
-            col.deleteOne({  $and: [{ userID:  `${interaction.user.id}` }, {increment: increment} ], $or: [{ contractAddress: contractAddress }, {collectionName: collectionName}]});
+            col.deleteOne({  $or: [{ contractAddress: contractAddress }, {collectionName: collectionName}] , userID:  interaction.user.id , increment: increment});
             
             await interaction.reply("Collection removed!")
             

@@ -22,9 +22,11 @@ module.exports = {
                 .setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
                 
             const entries =  col.find( { userID: interaction.user.id})
-            for(let i = 0; i<entries.length; i++) {
-                embed.addFields({ name: entries.collectionName, value: "Increment:" + entries.increment + "ETH"})
-            }
+            entries.forEach((item) => {
+                embed.addFields({ name: item.collectionName, value: "Increment:" + item.increment + "ETH"})
+            })
+                
+            
             await interaction.reply({ embeds: [embed] });
             
         } catch (err) {

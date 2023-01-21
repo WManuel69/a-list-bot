@@ -8,7 +8,8 @@ module.exports = {
 		.setDescription('See the floor price for any project.')
 		.addStringOption(option =>
 			option.setName('input')
-				.setDescription('Contract address or URL name')),
+				.setDescription('Contract address or URL name'))
+		.setRequired(true),
 	async execute(interaction) {
 		const input = interaction.options.get("input").value;
 		if (input.startsWith("0x") && input.length == 42) {

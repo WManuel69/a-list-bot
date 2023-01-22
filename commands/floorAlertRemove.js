@@ -16,16 +16,16 @@ module.exports = {
           .addStringOption(option => 
     		option
 				.setName('collection')
-      			.setDescription('Collection name'))        
+      			.setDescription('Collection name'))
 		.addStringOption(option => 
 			option
-				.setName("change")
+				.setName('change')
 				.setDescription("Format: 0.5").setRequired(true)),
 	async execute(interaction) {
 		const dbName = "Alist"
         const contractAddress = interaction.options.get('address').value;
-		const increment = interaction.options.get('change').value;
         const collectionName = interaction.options.get('collection').value;
+		const increment = interaction.options.get('change').value;
         try {
             client.connect();
             const db = client.db(dbName);

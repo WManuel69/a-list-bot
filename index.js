@@ -45,6 +45,7 @@ client.on("ready", () => {
     client.user.setActivity("with nfts");
 });
 
+
 client.login(discordToken);
 
 

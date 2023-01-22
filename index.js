@@ -53,27 +53,15 @@ client.on("ready", () => {
 
 client.on('interactionCreate', (message) => {
     
-        const channel = client.channels.cache.get('1063794467649359923');
-        channel.send("yo")
-    
-        
-        
-        
-    }
-    /*
+    const settings = {
+        apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
+        network: Network.ETH_MAINNET, // Replace with your network.
+    };
 
-        const settings = {
-            apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
-            network: Network.ETH_MAINNET, // Replace with your network.
-        };
+    const alchemy = new Alchemy(settings);
 
-        const alchemy = new Alchemy(settings);
-    
     while(true) {
-        
         db.connect();
-        
-        // Just to check if the collection does exist 
         alchemy.nft.getFloorPrice(contractAddress).then((d) => {
             
         })
@@ -91,17 +79,15 @@ client.on('interactionCreate', (message) => {
                     channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
                     col.deleteOne({  collectionName: item.collectionName , userID:  item.userID , increment: item.increment , currentPrice: item.currentPrice , contractAddress: item.contractAddress});
                 }
+
             })
         })
         
             
         db.close(); 
-        
-        */
-        
-            
-            
-    )
+    }
+    
+});
 
 
 client.login(discordToken);

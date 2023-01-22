@@ -11,12 +11,8 @@ module.exports = {
   		.setDescription('Remove alert from your list')
           .addStringOption(option => 
     		option
-				.setName('address')
-      			.setDescription('Contract address').setRequired(false))
-          .addStringOption(option => 
-    		option
 				.setName('collection')
-      			.setDescription('Collection name').setRequired(false))
+      			.setDescription('Collection name').setRequired(true))
 		.addStringOption(option => 
 			option
 				.setName('change')
@@ -30,7 +26,7 @@ module.exports = {
             client.connect();
             const db = client.db(dbName);
             const col = db.collection("contractAddresses");  
-            col.deleteOne({  $or: [{ contractAddress: contractAddress }, {collectionName: collectionName}] , userID:  interaction.user.id , increment: increment});
+            col.deleteOne({  collectionName: collectionName , userID:  interaction.user.id , increment: increment}); // $or: [{ contractAddress: contractAddress }, {collectionName: collectionName}]
             
             await interaction.reply("Collection removed!")
             

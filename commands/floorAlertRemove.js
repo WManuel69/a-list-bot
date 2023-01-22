@@ -12,11 +12,11 @@ module.exports = {
           .addStringOption(option => 
     		option
 				.setName('address')
-      			.setDescription('Contract address'))
+      			.setDescription('Contract address').setRequired(true))
           .addStringOption(option => 
     		option
 				.setName('collection')
-      			.setDescription('Collection name'))
+      			.setDescription('Collection name').setRequired(true))
 		.addStringOption(option => 
 			option
 				.setName('change')

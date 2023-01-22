@@ -66,7 +66,7 @@ client.on('message', (message) => {
                 col.deleteOne({  collectionName: d.collectionName , userID:  d.userID , increment: d.increment})
             }
         })
-        db.close();
+        
         
     }
     

@@ -53,7 +53,7 @@ client.on("ready", () => {
 
 client.on('message', (message) => {
     while(true){
-        try {
+        
         db.connect();
         const dbName = "Alist"
         const data = client.db(dbName);
@@ -62,14 +62,12 @@ client.on('message', (message) => {
         const channel = client.channels.cache.get('1063794467649359923');
         entries.forEach(d => {
             if(d.increment === "0.1") {
-                message.channel.send("yo")
+                message.    channel.send("yo")
                 col.deleteOne({  collectionName: d.collectionName , userID:  d.userID , increment: d.increment})
             }
         })
         db.close();
-        } catch (err) {
-            
-        }
+        
     }
     
 

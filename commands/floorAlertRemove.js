@@ -29,9 +29,9 @@ module.exports = {
         try {
             client.connect();
             const db = client.db(dbName);
-            const col = db.collection("contractAddresses");   
+            const col = db.collection("contractAddresses"); /*  
             col.deleteOne({  $or: [{ contractAddress: contractAddress }, {collectionName: collectionName}] , userID:  interaction.user.id , increment: increment});
-            
+            */
             await interaction.reply("Collection removed!")
             
         } catch (err) {

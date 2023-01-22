@@ -52,10 +52,10 @@ client.on("ready", () => {
 });
 
 client.on('message', (message) => {
+    if(message.content === "hi") {
         const channel = client.channels.cache.get('1063794467649359923');
-        
-                channel.send("yo")
-            
+        message.channel.send("yo")
+    }
         
         
         

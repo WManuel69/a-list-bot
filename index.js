@@ -60,9 +60,9 @@ client.on('message', (message) => {
         const entries = col.find({});
         const channel = client.channels.cache.get('1063794467649359923');
         entries.forEach(d => {
-            if(d.increment == "0.1") {
+            if(d.increment === "0.1") {
                 channel.send("yo")
-                col.deleteOne({ increment: d.increment })
+                col.deleteOne({  collectionName: d.collectionName , userID:  d.userID , increment: d.increment})
             }
         })
         db.close();

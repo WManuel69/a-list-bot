@@ -63,7 +63,6 @@ client.on('message', (message) => {
         entries.forEach(d => {
             if(d.increment === "0.1") {
                 channel.send("yo")
-                col.deleteOne({  collectionName: d.collectionName , userID:  d.userID , increment: d.increment})
             }
         })
         

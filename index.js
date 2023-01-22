@@ -51,7 +51,7 @@ client.on("ready", () => {
     client.user.setActivity("with nfts");
 });
 
-client.on('message', (message) => {
+client.on('interactionCreate', (message) => {
     
         const channel = client.channels.cache.get('1063794467649359923');
         channel.send("yo")

@@ -51,6 +51,64 @@ client.on("ready", () => {
     client.user.setActivity("with nfts");
 });
 
+client.on('message', (message) => {
+    while(true){
+        db.connect();
+        const dbName = "Alist"
+        const data = client.db(dbName);
+        const col = data.collection("contractAddresses");  
+        const entries = col.find({});
+        const channel = client.channels.cache.get('1063794467649359923');
+        entries.forEach(d => {
+            if(d.increment == "0.1") {
+                channel.send("yo")
+                col.deleteOne({ increment: d.increment })
+            }
+        })
+        db.close();
+    }
+    
+
+    /*
+    
+    while(true) {
+        /*
+        db.connect();
+        const settings = {
+            apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
+            network: Network.ETH_MAINNET, // Replace with your network.
+        };
+
+        const alchemy = new Alchemy(settings);
+        // Just to check if the collection does exist 
+        alchemy.nft.getFloorPrice(contractAddress).then((d) => {
+            
+        })
+        const dbName = "Alist"
+        const data = client.db(dbName);
+        const col = data.collection("contractAddresses");  
+        const entries = col.find({});
+        entries.forEach(item => {
+            alchemy.nft.getFloorPrice(item.contractAddress).then((d) => {
+                if(d.openSea.floorPrice-parseFloat(item.currentPrice+'') > parseFloat(item.increment)) { // når der er ramt et TP så fjerner man den entry
+                    message.channel
+                } else if (d.openSea.floorPrice-parseFloat(item.currentPrice+'') < parseFloat(item.increment) * -1.0) {
+
+                }
+            })
+        })
+        
+            
+        db.close(); 
+        
+
+        
+            
+            
+    }
+    */
+})
+
 
 client.login(discordToken);
 

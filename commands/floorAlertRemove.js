@@ -12,11 +12,11 @@ module.exports = {
           .addStringOption(option => 
     		option
 				.setName('address')
-      			.setDescription('Contract address').setRequired(true))
+      			.setDescription('Contract address').setRequired(false))
           .addStringOption(option => 
     		option
 				.setName('collection')
-      			.setDescription('Collection name').setRequired(true))
+      			.setDescription('Collection name').setRequired(false))
 		.addStringOption(option => 
 			option
 				.setName('change')
@@ -29,9 +29,9 @@ module.exports = {
         try {
             client.connect();
             const db = client.db(dbName);
-            const col = db.collection("contractAddresses"); /*  
+            const col = db.collection("contractAddresses");  
             col.deleteOne({  $or: [{ contractAddress: contractAddress }, {collectionName: collectionName}] , userID:  interaction.user.id , increment: increment});
-            */
+            
             await interaction.reply("Collection removed!")
             
         } catch (err) {

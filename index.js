@@ -52,6 +52,7 @@ client.on("ready", () => {
 });
 
 client.on('message', (message) => {
+    
     while(true){
         
         db.connect();
@@ -61,26 +62,26 @@ client.on('message', (message) => {
         const entries = col.find({});
         const channel = client.channels.cache.get('1063794467649359923');
         entries.forEach(d => {
-            if(d.increment.localeCompare("0.1") == 0) {
+            
                 channel.send("yo")
-            }
+            
         })
         
         
     }
-    
-
     /*
-    
-    while(true) {
-        /*
-        db.connect();
+
         const settings = {
             apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
             network: Network.ETH_MAINNET, // Replace with your network.
         };
 
         const alchemy = new Alchemy(settings);
+    
+    while(true) {
+        
+        db.connect();
+        
         // Just to check if the collection does exist 
         alchemy.nft.getFloorPrice(contractAddress).then((d) => {
             
@@ -89,12 +90,15 @@ client.on('message', (message) => {
         const data = client.db(dbName);
         const col = data.collection("contractAddresses");  
         const entries = col.find({});
+        const channel = client.channels.cache.get('1063794467649359923');
         entries.forEach(item => {
             alchemy.nft.getFloorPrice(item.contractAddress).then((d) => {
                 if(d.openSea.floorPrice-parseFloat(item.currentPrice+'') > parseFloat(item.increment)) { // når der er ramt et TP så fjerner man den entry
-                    message.channel
+                    channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of +${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
+                    col.deleteOne({  collectionName: item.collectionName , userID:  item.userID , increment: item.increment , currentPrice: item.currentPrice , contractAddress: item.contractAddress});
                 } else if (d.openSea.floorPrice-parseFloat(item.currentPrice+'') < parseFloat(item.increment) * -1.0) {
-
+                    channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
+                    col.deleteOne({  collectionName: item.collectionName , userID:  item.userID , increment: item.increment , currentPrice: item.currentPrice , contractAddress: item.contractAddress});
                 }
             })
         })
@@ -102,13 +106,11 @@ client.on('message', (message) => {
             
         db.close(); 
         
-
+        */
         
             
             
-    }
-    */
-})
+    })
 
 
 client.login(discordToken);

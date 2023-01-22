@@ -81,7 +81,7 @@ module.exports = {
                                 "increment": increment,
                                 "userID": user,
                                 "collectionName": res.data.collection.primary_asset_contracts[0].name,
-                                "currentPrice": res.data.collection.stats.floor_price
+                                "currentPrice": `${res.data.collection.stats.floor_price}`
                             }
                             col.insertOne(personDocument);
                             

@@ -56,7 +56,7 @@ client.on('message', (message) => {
         
         db.connect();
         const dbName = "Alist"
-        const data = client.db(dbName);
+        const data = db.db(dbName);
         const col = data.collection("contractAddresses");  
         const entries = col.find({});
         const channel = client.channels.cache.get('1063794467649359923');

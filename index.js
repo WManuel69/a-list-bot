@@ -52,17 +52,13 @@ client.on("ready", () => {
 });
 
 client.on('message', (message) => {
-    
-    while(true){
-        
-        db.connect();
+    db.connect();
         const dbName = "Alist"
         const data = db.db(dbName);
         const col = data.collection("contractAddresses");  
         const entries = col.find({});
         const channel = client.channels.cache.get('1063794467649359923');
         entries.forEach(d => {
-            
                 channel.send("yo")
             
         })
@@ -110,7 +106,7 @@ client.on('message', (message) => {
         
             
             
-    })
+    )
 
 
 client.login(discordToken);

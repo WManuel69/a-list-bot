@@ -22,7 +22,7 @@ module.exports = {
             await interaction.reply("Purge completed!")
             
         } catch (err) {
-            interaction.reply("error occurred");
+            interaction.reply("Error occurred, try again");
             
         }
     

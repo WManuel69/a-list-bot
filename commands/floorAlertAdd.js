@@ -53,7 +53,7 @@ module.exports = {
                         col.insertOne(personDocument);
                         
                     } catch (err) {
-                        interaction.reply("error occurred");
+                        interaction.reply("Error occurred, try again");
                         return;
                     }
                 

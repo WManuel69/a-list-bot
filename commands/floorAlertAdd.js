@@ -77,9 +77,8 @@ module.exports = {
                             client.connect();
                             console.log("Connected correctly to server");
                             const db = client.db(dbName);
-                            const names = db.getCollectionNames();
                             try {
-                                db.createCollection(res.data.collection.primary_asset_contracts[0].address);
+                            db.createCollection(res.data.collection.primary_asset_contracts[0].address);
                             } catch (err) {
                             
                             }

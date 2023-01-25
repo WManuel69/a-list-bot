@@ -41,16 +41,13 @@ module.exports = {
                         console.log("Connected correctly to server");
                         const db = client.db(dbName);
                         // Use the collection "people"
-                        const col = db.collection("contractAddresses");
-                        // Construct a document
-                        const cars = ["Saab", "Volvo", "BMW"];                                                                                                                                                         
+                        const col = db.collection(`${contractAddress}`);
+                        // Construct a document                                                                                                                                                      
                         let personDocument = {
-                            "contractAddress": contractAddress,
                             "increment": increment,
                             "userID": user,
                             "collectionName": resp.data.collection.primary_asset_contracts[0].name,
                             "currentPrice": `${d.openSea.floorPrice}`,
-                            "kek": cars
                         }
                         col.insertOne(personDocument);
                         
@@ -76,10 +73,9 @@ module.exports = {
                             console.log("Connected correctly to server");
                             const db = client.db(dbName);
                             // Use the collection "people"
-                            const col = db.collection("contractAddresses");
+                            const col = db.collection(`${res.data.collection.primary_asset_contracts[0].address}`);
                             // Construct a document                                                                                                                                                              
                             let personDocument = {
-                                "contractAddress": res.data.collection.primary_asset_contracts[0].address,
                                 "increment": increment,
                                 "userID": user,
                                 "collectionName": res.data.collection.primary_asset_contracts[0].name,

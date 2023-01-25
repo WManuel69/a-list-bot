@@ -48,7 +48,7 @@ module.exports = {
                         }
                         
                         // Use the collection "people"
-                        db.collection(`${contractAddress}`).col.insertOne(personDocument);
+                        db.collection(`${contractAddress}`).insertOne(personDocument);
                         // Construct a document                                                                                                                                                      
                         
                     } catch (err) {

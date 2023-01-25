@@ -42,13 +42,19 @@ module.exports = {
                         const db = client.db(dbName);
                         // Use the collection "people"
                         const col = db.collection("contractAddresses");
-                        // Construct a document                                                                                                                                                              
+                        // Construct a document
+                        let text = '{"employees":[' +
+    '{"firstName":"John","lastName":"Doe" },' +
+    '{"firstName":"Anna","lastName":"Smith" },' +
+    '{"firstName":"Peter","lastName":"Jones" }]}';
+                        let obj = JSON.parse(text);                                                                                                                                                            
                         let personDocument = {
                             "contractAddress": contractAddress,
                             "increment": increment,
                             "userID": user,
                             "collectionName": resp.data.collection.primary_asset_contracts[0].name,
-                            "currentPrice": `${d.openSea.floorPrice}`
+                            "currentPrice": `${d.openSea.floorPrice}`,
+                            "kek": obj
                         }
                         col.insertOne(personDocument);
                         

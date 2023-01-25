@@ -40,19 +40,16 @@ module.exports = {
                         client.connect();
                         console.log("Connected correctly to server");
                         const db = client.db(dbName);
-                        if (!names.includes(`${contractAddress}`)) {
-                            db.createCollection(`${contractAddress}`,{ capped : true, size : 5242880, max : 5000 });
-                        }
-                        // Use the collection "people"
-                        const col = db.collection(`${contractAddress}`);
-                        // Construct a document                                                                                                                                                      
                         let personDocument = {
                             "increment": increment,
                             "userID": user,
                             "collectionName": resp.data.collection.primary_asset_contracts[0].name,
                             "currentPrice": `${d.openSea.floorPrice}`,
                         }
-                        col.insertOne(personDocument);
+                        
+                        // Use the collection "people"
+                        db.collection(`${contractAddress}`).col.insertOne(personDocument);
+                        // Construct a document                                                                                                                                                      
                         
                     } catch (err) {
                         interaction.reply("Error occurred, try again");
@@ -75,20 +72,16 @@ module.exports = {
                             client.connect();
                             console.log("Connected correctly to server");
                             const db = client.db(dbName);
-                            const names = db.getCollectionNames();
-                            if (!names.includes(`${res.data.collection.primary_asset_contracts[0].address}`)) {
-                                db.createCollection(`${res.data.collection.primary_asset_contracts[0].address}`,{ capped : true, size : 5242880, max : 5000 });
-                            }
-                            // Use the collection "people"
-                            const col = db.collection(`${res.data.collection.primary_asset_contracts[0].address}`);
-                            // Construct a document                                                                                                                                                              
+                            
                             let personDocument = {
                                 "increment": increment,
                                 "userID": user,
                                 "collectionName": res.data.collection.primary_asset_contracts[0].name,
                                 "currentPrice": `${res.data.collection.stats.floor_price}`
                             }
-                            col.insertOne(personDocument);
+                            // Use the collection "people"
+                            db.collection(`${res.data.collection.primary_asset_contracts[0].address}`).insertOne(personDocument);
+                            // Construct a document                                                                                                                                                              
                             
                         } catch (err) {
                             interaction.reply("error occurred");

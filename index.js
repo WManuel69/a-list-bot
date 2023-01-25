@@ -50,7 +50,7 @@ client.on("ready", () => {
     console.log("Discord bot has started!");
     client.user.setActivity("with nfts");
 });
-
+/*
 client.on('interactionCreate', (message) => {
     
     const settings = {
@@ -69,7 +69,7 @@ client.on('interactionCreate', (message) => {
         const data = client.db(dbName);
         const col = data.collection("contractAddresses");  
         const entries = col.find({});
-        const channel = client.channels.cache.get('1063794467649359923');
+        const channel = client.channels.cache.get('1063794467649359923');  // db.getCollectionNames()
         entries.forEach(item => {
             alchemy.nft.getFloorPrice(item.contractAddress).then((d) => {
                 if(d.openSea.floorPrice-parseFloat(item.currentPrice+'') > parseFloat(item.increment)) { // når der er ramt et TP så fjerner man den entry
@@ -88,6 +88,7 @@ client.on('interactionCreate', (message) => {
     }
     
 });
+*/
 
 
 client.login(discordToken);

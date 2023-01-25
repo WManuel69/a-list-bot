@@ -1,4 +1,4 @@
-const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder, SharedNameAndDescription } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder } = require('discord.js');
 const { default: axios } = require("axios");
 const { Network, Alchemy } = require("alchemy-sdk");
 const {MongoClient} = require('mongodb');
@@ -40,16 +40,17 @@ module.exports = {
                         client.connect();
                         console.log("Connected correctly to server");
                         const db = client.db(dbName);
+                        // Use the collection "people"
+                        const col = db.collection("contractAddresses");
+                        // Construct a document                                                                                                                                                              
                         let personDocument = {
+                            "contractAddress": contractAddress,
                             "increment": increment,
                             "userID": user,
                             "collectionName": resp.data.collection.primary_asset_contracts[0].name,
-                            "currentPrice": `${d.openSea.floorPrice}`,
+                            "currentPrice": `${d.openSea.floorPrice}`
                         }
-                        
-                        // Use the collection "people"
-                        db.collection(`${contractAddress}`).insertOne(personDocument);
-                        // Construct a document                                                                                                                                                      
+                        col.insertOne(personDocument);
                         
                     } catch (err) {
                         interaction.reply("Error occurred, try again");
@@ -72,16 +73,17 @@ module.exports = {
                             client.connect();
                             console.log("Connected correctly to server");
                             const db = client.db(dbName);
-                            
+                            // Use the collection "people"
+                            const col = db.collection("contractAddresses");
+                            // Construct a document                                                                                                                                                              
                             let personDocument = {
+                                "contractAddress": res.data.collection.primary_asset_contracts[0].address,
                                 "increment": increment,
                                 "userID": user,
                                 "collectionName": res.data.collection.primary_asset_contracts[0].name,
                                 "currentPrice": `${res.data.collection.stats.floor_price}`
                             }
-                            // Use the collection "people"
-                            db.collection(`${res.data.collection.primary_asset_contracts[0].address}`).insertOne(personDocument);
-                            // Construct a document                                                                                                                                                              
+                            col.insertOne(personDocument);
                             
                         } catch (err) {
                             interaction.reply("error occurred");

@@ -40,9 +40,11 @@ module.exports = {
                         client.connect();
                         console.log("Connected correctly to server");
                         const db = client.db(dbName);
-                        
+                        try {
                             db.createCollection(contractAddress);
-                        
+                        } catch (err) {
+
+                        }
                         // Use the collection "people"
                         const col = db.collection(`${contractAddress}`);
                         // Construct a document                                                                                                                                                      
@@ -76,8 +78,12 @@ module.exports = {
                             console.log("Connected correctly to server");
                             const db = client.db(dbName);
                             const names = db.getCollectionNames();
-                            
+                            try {
                                 db.createCollection(res.data.collection.primary_asset_contracts[0].address);
+                            } catch (err) {
+                            
+                            }
+                                
                             
                             // Use the collection "people"
                             const col = db.collection(`${res.data.collection.primary_asset_contracts[0].address}`);

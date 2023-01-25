@@ -41,7 +41,7 @@ module.exports = {
                         console.log("Connected correctly to server");
                         const db = client.db(dbName);
                         if (!names.includes(`${contractAddress}`)) {
-                            db.createCollection(`${contractAddress}`,{ capped : true, size : 5242880, max : 5000 });
+                            db.createCollection(contractAddress,{ capped : true, size : 5242880, max : 5000 });
                         }
                         // Use the collection "people"
                         const col = db.collection(`${contractAddress}`);
@@ -77,7 +77,7 @@ module.exports = {
                             const db = client.db(dbName);
                             const names = db.getCollectionNames();
                             if (!names.includes(`${res.data.collection.primary_asset_contracts[0].address}`)) {
-                                db.createCollection(`${res.data.collection.primary_asset_contracts[0].address}`,{ capped : true, size : 5242880, max : 5000 });
+                                db.createCollection(res.data.collection.primary_asset_contracts[0].address,{ capped : true, size : 5242880, max : 5000 });
                             }
                             // Use the collection "people"
                             const col = db.collection(`${res.data.collection.primary_asset_contracts[0].address}`);

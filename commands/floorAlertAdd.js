@@ -1,4 +1,4 @@
-const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder, SharedNameAndDescription } = require('discord.js');
 const { default: axios } = require("axios");
 const { Network, Alchemy } = require("alchemy-sdk");
 const {MongoClient} = require('mongodb');
@@ -40,6 +40,9 @@ module.exports = {
                         client.connect();
                         console.log("Connected correctly to server");
                         const db = client.db(dbName);
+                        if (!names.includes(`${contractAddress}`)) {
+                            db.createCollection(`${contractAddress}`);
+                        }
                         // Use the collection "people"
                         const col = db.collection(`${contractAddress}`);
                         // Construct a document                                                                                                                                                      
@@ -72,6 +75,10 @@ module.exports = {
                             client.connect();
                             console.log("Connected correctly to server");
                             const db = client.db(dbName);
+                            const names = db.getCollectionNames();
+                            if (!names.includes(`${res.data.collection.primary_asset_contracts[0].address}`)) {
+                                db.createCollection(`${res.data.collection.primary_asset_contracts[0].address}`);
+                            }
                             // Use the collection "people"
                             const col = db.collection(`${res.data.collection.primary_asset_contracts[0].address}`);
                             // Construct a document                                                                                                                                                              

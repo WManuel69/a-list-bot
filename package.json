@@ -20,6 +20,7 @@
     "alchemy-sdk": "^2.3.0",
     "axios": "^1.2.2",
     "discord.js": "^14.7.1",
+    "ethers": "^5.7.2",
     "fs": "^0.0.1-security",
     "mongodb": "^4.13.0",
     "path": "^0.12.7"

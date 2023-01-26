@@ -29,13 +29,10 @@ module.exports = {
                     for(let i = 0; i<stats.collections; i++) {
                         let collect = db.collection(col[i].s.namespace.collection);
                         collect.deleteOne({  collectionName: collectionName , userID:  interaction.user.id , change: change});
-                        if (collect.countDocuments() == 1) {
-                            db.dropCollection(col[i].s.namespace.collection);
-                        }
                     }
                 }); 
             })
-
+            
             
             await interaction.reply("Collection removed!")
             

@@ -36,7 +36,7 @@ module.exports = {
             
                 
             
-            await interaction.reply({ embeds: [embed] });
+            
             
         } catch (err) {
             interaction.reply("Error occurred, try again");
@@ -45,7 +45,7 @@ module.exports = {
     
         finally {
            client.close();
-           
+           await interaction.reply({ embeds: [embed] });
         }
 
 

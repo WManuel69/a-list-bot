@@ -1,7 +1,8 @@
+return;
 const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder } = require('discord.js');
 const { default: axios } = require("axios");
 const { Network, Alchemy } = require("alchemy-sdk");
-const {MongoClient} = require('mongodb');
+const { MongoClient } = require('mongodb');
 const url = "mongodb+srv://doadmin:mZXBV7k3z24y8509@db-mongodb-ams3-14998-ce0deaf1.mongo.ondigitalocean.com/admin?authSource=admin&replicaSet=db-mongodb-ams3-14998&tls=true";
 const db = new MongoClient(url);
 
@@ -50,9 +51,7 @@ client.on("ready", () => {
     console.log("Discord bot has started!");
     client.user.setActivity("with nfts");
 });
-/*
-client.on('interactionCreate', (message) => {
-    
+setInterval(async () => {
     const settings = {
         apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
         network: Network.ETH_MAINNET, // Replace with your network.
@@ -60,44 +59,42 @@ client.on('interactionCreate', (message) => {
 
     const alchemy = new Alchemy(settings);
 
-    while(true) {
+    while (true) {
         try {
-        db.connect();
-        const dbName = "Alist"
-        const data = db.db(dbName);
-        db.stats().then(stats => {
-            db.collections().then(col => {
-                for(let i = 0; i<stats.collections; i++) {
-                    let collect = data.collection(col[i].s.namespace.collection);
-                    const entries = collect.find({});
-                    const channel = client.channels.cache.get('1063794467649359923');  // db.getCollectionNames()
-                    alchemy.nft.getFloorPrice(col[i].s.namespace.collection).then((d) => {
-                        entries.forEach(item => {
-                        if(d.openSea.floorPrice-parseFloat(item.currentPrice+'') > parseFloat(item.increment)) { // når der er ramt et TP så fjerner man den entry
-                            channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of +${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
-                            col.deleteOne({  collectionName: item.collectionName , userID:  item.userID , increment: item.increment , currentPrice: item.currentPrice , contractAddress: item.contractAddress});
-                        } else if (d.openSea.floorPrice-parseFloat(item.currentPrice+'') < parseFloat(item.increment) * -1.0) {
-                            channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
-                            col.deleteOne({  collectionName: item.collectionName , userID:  item.userID , increment: item.increment , currentPrice: item.currentPrice , contractAddress: item.contractAddress});
-                        }
+            db.connect();
+            const dbName = "Alist"
+            const data = db.db(dbName);
+            db.stats().then(stats => {
+                db.collections().then(col => {
+                    for (let i = 0; i < stats.collections; i++) {
+                        let collect = data.collection(col[i].s.namespace.collection);
+                        const entries = collect.find({});
+                        const channel = client.channels.cache.get('1063794467649359923');  // db.getCollectionNames()
+                        alchemy.nft.getFloorPrice(col[i].s.namespace.collection).then((d) => {
+                            entries.forEach(item => {
+                                console.log(item)
+                                if (d.openSea.floorPrice - parseFloat(item.currentPrice + '') > parseFloat(item.increment)) { // når der er ramt et TP så fjerner man den entry
+                                    channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of +${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
+                                    col.deleteOne({ collectionName: item.collectionName, userID: item.userID, increment: item.increment, currentPrice: item.currentPrice, contractAddress: item.contractAddress });
+                                } else if (d.openSea.floorPrice - parseFloat(item.currentPrice + '') < parseFloat(item.increment) * -1.0) {
+                                    channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
+                                    col.deleteOne({ collectionName: item.collectionName, userID: item.userID, increment: item.increment, currentPrice: item.currentPrice, contractAddress: item.contractAddress });
+                                }
 
+                            })
                         })
-                     })
-                }
-            }); 
-        })
-         
-        
-    } catch (err) {
-        console.log("error occurred");
-    } finally {
-            
-        db.close(); 
+                    }
+                });
+            })
+        } catch (err) {
+            console.log("error occurred");
+        } finally {
+
+            db.close();
+        }
     }
-    }
-    
-});
-*/
+
+}, 1000);
 
 
 client.login(discordToken);

@@ -13,6 +13,7 @@ module.exports = {
 		const dbName = "Alist"
         try {
             client.connect();
+            
             const db = client.db(dbName);
             db.stats().then(stats => {
                 db.collections().then(col => {
@@ -23,9 +24,9 @@ module.exports = {
                     for(let i = 0; i<stats.collections; i++) {
                         let collect = db.collection(col[i].s.namespace.collection);
                         const entries =  collect.find( { userID: interaction.user.id });
-                        entries.forEach((item) => {
+                        entries.forEach(async((item) => {
                             embed.addFields({ name: item.collectionName, value: "Change: " + item.increment + " ETH" })
-                        });
+                        }));
                     }
                     interaction.reply({ embeds: [embed] });
                 }); 

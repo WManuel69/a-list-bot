@@ -14,10 +14,16 @@ module.exports = {
         try {
             client.connect();
             const db = client.db(dbName);
-            const col = db.collection("contractAddresses");   
-            col.deleteMany( {
-                userID:  interaction.user.id,
-            } );
+            db.stats().then(stats => {
+                db.collections().then(col => {
+                    for(let i = 0; i<stats.collections; i++) {
+                        let collect = db.collection(col[i].s.namespace.collection);
+                        collect.deleteMany( {
+                            userID:  interaction.user.id,
+                        } );
+                    }
+                }); 
+            })
             
             await interaction.reply("Purge completed!")
             

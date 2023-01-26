@@ -14,16 +14,12 @@ module.exports = {
         try {
             client.connect();
             const db = client.db(dbName);
-            const col = db.collection("contractAddresses");
-                                                                                                                                                                       
-            let embed = new EmbedBuilder()
-                .setColor(0x0099FF)
-                .setTitle('My alerts')
-                .setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
-                
-            
             db.stats().then(stats => {
                 db.collections().then(col => {
+                    let embed = new EmbedBuilder()
+                    .setColor(0x0099FF)
+                    .setTitle('My alerts')
+                    .setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
                     for(let i = 0; i<stats.collections; i++) {
                         let collect = db.collection(col[i].s.namespace.collection);
                         const entries =  collect.find( { userID: interaction.user.id });
@@ -31,9 +27,10 @@ module.exports = {
                             embed.addFields({ name: item.collectionName, value: "Change: " + item.increment + " ETH" })
                         });
                     }
+                    interaction.reply({ embeds: [embed] });
                 }); 
             })
-            
+             
                 
             
             
@@ -45,7 +42,7 @@ module.exports = {
     
         finally {
            client.close();
-           await interaction.reply({ embeds: [embed] });
+           
         }
 
 

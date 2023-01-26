@@ -59,15 +59,15 @@ setInterval(async () => {
     const dbName = "Alist"
     const db = clientDb.db(dbName);
     db.stats().then(stats => {
-        db.collections().then(async(col) => {
+        db.collections().then(async (col) => {
             for (let i = 0; i < stats.collections; i++) {
                 let collectionNames = (await db.collections())[i].s.namespace.collection;
                 let collect = db.collection(collectionNames);
                 console.log(collect)
 
-                const entries =  collect.find( { userID: "143444705009598464" });
-                if(!ethers.utils.isAddress(col[i].s.namespace.collection)) return console.log("Not a contract address")
-                alchemy.nft.getFloorPrice(col[i].s.namespace.collection).then(async(d) => {
+                const entries = collect.find({});
+                if (!ethers.utils.isAddress(col[i].s.namespace.collection)) return console.log("Not a contract address")
+                alchemy.nft.getFloorPrice(col[i].s.namespace.collection).then(async (d) => {
                     entries.forEach(item => {
                         console.log(0)
                         // if (d.openSea.floorPrice - parseFloat(item.currentPrice + '') > parseFloat(0)) { 

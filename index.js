@@ -61,30 +61,39 @@ client.on('interactionCreate', (message) => {
     const alchemy = new Alchemy(settings);
 
     while(true) {
+        try {
         db.connect();
-        alchemy.nft.getFloorPrice(contractAddress).then((d) => {
-            
-        })
         const dbName = "Alist"
-        const data = client.db(dbName);
-        const col = data.collection("contractAddresses");  
-        const entries = col.find({});
-        const channel = client.channels.cache.get('1063794467649359923');  // db.getCollectionNames()
-        entries.forEach(item => {
-            alchemy.nft.getFloorPrice(item.contractAddress).then((d) => {
-                if(d.openSea.floorPrice-parseFloat(item.currentPrice+'') > parseFloat(item.increment)) { // når der er ramt et TP så fjerner man den entry
-                    channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of +${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
-                    col.deleteOne({  collectionName: item.collectionName , userID:  item.userID , increment: item.increment , currentPrice: item.currentPrice , contractAddress: item.contractAddress});
-                } else if (d.openSea.floorPrice-parseFloat(item.currentPrice+'') < parseFloat(item.increment) * -1.0) {
-                    channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
-                    col.deleteOne({  collectionName: item.collectionName , userID:  item.userID , increment: item.increment , currentPrice: item.currentPrice , contractAddress: item.contractAddress});
-                }
+        const data = db.db(dbName);
+        db.stats().then(stats => {
+            db.collections().then(col => {
+                for(let i = 0; i<stats.collections; i++) {
+                    let collect = data.collection(col[i].s.namespace.collection);
+                    const entries = collect.find({});
+                    const channel = client.channels.cache.get('1063794467649359923');  // db.getCollectionNames()
+                    alchemy.nft.getFloorPrice(col[i].s.namespace.collection).then((d) => {
+                        entries.forEach(item => {
+                        if(d.openSea.floorPrice-parseFloat(item.currentPrice+'') > parseFloat(item.increment)) { // når der er ramt et TP så fjerner man den entry
+                            channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of +${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
+                            col.deleteOne({  collectionName: item.collectionName , userID:  item.userID , increment: item.increment , currentPrice: item.currentPrice , contractAddress: item.contractAddress});
+                        } else if (d.openSea.floorPrice-parseFloat(item.currentPrice+'') < parseFloat(item.increment) * -1.0) {
+                            channel.send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.increment} ETH. The current floor price is now ${d.openSea.floorPrice}`);
+                            col.deleteOne({  collectionName: item.collectionName , userID:  item.userID , increment: item.increment , currentPrice: item.currentPrice , contractAddress: item.contractAddress});
+                        }
 
-            })
+                        })
+                     })
+                }
+            }); 
         })
+         
         
+    } catch (err) {
+        console.log("error occurred");
+    } finally {
             
         db.close(); 
+    }
     }
     
 });

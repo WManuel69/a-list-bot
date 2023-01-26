@@ -64,7 +64,7 @@ setInterval(async () => {
                 let collectionNames = (await db.collections())[i].s.namespace.collection;
                 let collect = db.collection(collectionNames);
                 const entries = collect.find({});
-                if (!ethers.utils.isAddress(col[i].s.namespace.collection)) return console.log("Not a contract address")
+                // if (!ethers.utils.isAddress(col[i].s.namespace.collection)) return console.log("Not a contract address")
                 alchemy.nft.getFloorPrice(col[i].s.namespace.collection).then(async (d) => {
                     entries.forEach(item => {
                         console.log(0)

@@ -13,28 +13,26 @@ module.exports = {
 		const dbName = "Alist"
         try {
             client.connect();
-            
             const db = client.db(dbName);
-            db.stats().then(stats => {
-                db.collections().then(col => {
-                    let embed = new EmbedBuilder()
-                    .setColor(0x0099FF)
-                    .setTitle('My alerts')
-                    .setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
-                    for(let i = 0; i<stats.collections; i++) {
-                        let collect = db.collection(col[i].s.namespace.collection);
-                        const entries =  collect.find( { userID: interaction.user.id });
-                        entries.forEach(async((item) => {
-                            embed.addFields({ name: item.collectionName, value: "Change: " + item.increment + " ETH" })
-                        }));
-                    }
-                    interaction.reply({ embeds: [embed] });
-                }); 
-            })
-             
+            const col = db.collection("contractAddresses");
+                                                                                                                                                                       
+            let embed = new EmbedBuilder()
+                .setColor(0x0099FF)
+                .setTitle('My alerts')
+                .setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
+            
+            const numOfCollections = (await db.stats()).collections;
+            for(let i = 0; i<numOfCollections; i++) {
+                let collectionNames = (await db.collections())[i].s.namespace.collection;
+                let collect = db.collection(collectionNames);
+                const entries =  collect.find( { userID: interaction.user.id });
+                await entries.forEach((item) => {
+                    embed.addFields({ name: item.collectionName, value: "Change: " + item.increment + " ETH" })
+                });
+            }
                 
             
-            
+            await interaction.reply({ embeds: [embed] });
             
         } catch (err) {
             interaction.reply("Error occurred, try again");

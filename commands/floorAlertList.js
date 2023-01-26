@@ -27,7 +27,7 @@ module.exports = {
                 let collect = db.collection(collectionNames);
                 const entries =  collect.find( { userID: interaction.user.id });
                 await entries.forEach((item) => {
-                    embed.addFields({ name: item.collectionName, value: "Change: " + item.increment + " ETH" })
+                    embed.addFields({ name: item.collectionName, value: "Change: " + item.change + " ETH" })
                 });
             }
                 

@@ -19,14 +19,19 @@ module.exports = {
 				.setDescription("Format: 0.5").setRequired(true)),
 	async execute(interaction) {
 		const dbName = "Alist"
-        const contractAddress = interaction.options.get('address').value;
         const collectionName = interaction.options.get('collection').value;
 		const increment = interaction.options.get('change').value;
         try {
             client.connect();
             const db = client.db(dbName);
-            const col = db.collection("contractAddresses");  
-            col.deleteOne({  collectionName: collectionName , userID:  interaction.user.id , increment: increment}); // $or: [{ contractAddress: contractAddress }, {collectionName: collectionName}]
+            db.stats().then(stats => {
+                db.collections().then(col => {
+                    for(let i = 0; i<stats.collections; i++) {
+                        let collect = db.collection(col[i].s.namespace.collection);
+                        collect.deleteOne({  collectionName: collectionName , userID:  interaction.user.id , increment: increment});
+                    }
+                }); 
+            })
             
             await interaction.reply("Collection removed!")
             

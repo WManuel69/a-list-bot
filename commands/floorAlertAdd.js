@@ -22,7 +22,7 @@ module.exports = {
                 ,
 	async execute(interaction) {
 		const contractAddress = interaction.options.get('address').value;
-		const increment = interaction.options.get('change').value;
+		const change = interaction.options.get('change').value;
 		const dbName = "Alist";
         const user = interaction.user.id;
         if (contractAddress.startsWith("0x") && contractAddress.length == 42) {
@@ -49,7 +49,7 @@ module.exports = {
                         const col = db.collection(`${contractAddress}`);
                         // Construct a document                                                                                                                                                      
                         let personDocument = {
-                            "increment": increment,
+                            "change": change,
                             "userID": user,
                             "collectionName": resp.data.collection.primary_asset_contracts[0].name,
                             "currentPrice": `${d.openSea.floorPrice}`,
@@ -88,7 +88,7 @@ module.exports = {
                             const col = db.collection(`${res.data.collection.primary_asset_contracts[0].address}`);
                             // Construct a document                                                                                                                                                              
                             let personDocument = {
-                                "increment": increment,
+                                "change": change,
                                 "userID": user,
                                 "collectionName": res.data.collection.primary_asset_contracts[0].name,
                                 "currentPrice": `${res.data.collection.stats.floor_price}`

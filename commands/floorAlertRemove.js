@@ -28,7 +28,7 @@ module.exports = {
                 db.collections().then(col => {
                     for(let i = 0; i<stats.collections; i++) {
                         let collect = db.collection(col[i].s.namespace.collection);
-                        collect.deleteOne({  collectionName: collectionName , userID:  interaction.user.id , increment: increment});
+                        collect.deleteOne({  collectionName: collectionName , userID:  interaction.user.id , change: increment});
                     }
                 }); 
             })

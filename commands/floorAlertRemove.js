@@ -20,7 +20,7 @@ module.exports = {
 	async execute(interaction) {
 		const dbName = "Alist"
         const collectionName = interaction.options.get('collection').value;
-		const increment = interaction.options.get('change').value;
+		const change = interaction.options.get('change').value;
         try {
             client.connect();
             const db = client.db(dbName);
@@ -28,10 +28,14 @@ module.exports = {
                 db.collections().then(col => {
                     for(let i = 0; i<stats.collections; i++) {
                         let collect = db.collection(col[i].s.namespace.collection);
-                        collect.deleteOne({  collectionName: collectionName , userID:  interaction.user.id , change: increment});
+                        collect.deleteOne({  collectionName: collectionName , userID:  interaction.user.id , change: change});
+                        if (collect.countDocuments() == 0) {
+                            db.dropCollection(col[i].s.namespace.collection);
+                        }
                     }
                 }); 
             })
+
             
             await interaction.reply("Collection removed!")
             

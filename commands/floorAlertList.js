@@ -14,7 +14,6 @@ module.exports = {
         try {
             client.connect();
             const db = client.db(dbName);
-            const col = db.collection("contractAddresses");
                                                                                                                                                                        
             let embed = new EmbedBuilder()
                 .setColor(0x0099FF)

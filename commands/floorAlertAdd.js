@@ -52,7 +52,7 @@ module.exports = {
                             "change": change,
                             "userID": user,
                             "collectionName": resp.data.collection.primary_asset_contracts[0].name,
-                            "currentPrice": `${resp.data.collection.stats.floor_price}`,
+                            "currentPrice": resp.data.collection.stats.floor_price,
                             "slug": collectionName
                         }
                         col.insertOne(personDocument).catch(err =>{
@@ -95,7 +95,7 @@ module.exports = {
                                 "change": change,
                                 "userID": user,
                                 "collectionName": res.data.collection.primary_asset_contracts[0].name,
-                                "currentPrice": `${res.data.collection.stats.floor_price}`,
+                                "currentPrice": res.data.collection.stats.floor_price,
                                 "slug": contractAddress
                             }
                             col.insertOne(personDocument);

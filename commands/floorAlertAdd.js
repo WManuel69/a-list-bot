@@ -52,7 +52,7 @@ module.exports = {
                             "change": change,
                             "userID": user,
                             "collectionName": resp.data.collection.primary_asset_contracts[0].name,
-                            "currentPrice": `${d.openSea.floorPrice}`,
+                            "currentPrice": `${resp.data.collection.stats.floor_price}`,
                             "slug": collectionName
                         }
                         col.insertOne(personDocument).catch(err =>{
@@ -70,7 +70,7 @@ module.exports = {
                     interaction.reply("Wrong contract address")
                 });
             }).catch((err) => {
-                console.log(`COllection already exists...`)
+                console.log(`Collection already exists...`)
                 interaction.reply("Wrong contract address")
             });
         } else {

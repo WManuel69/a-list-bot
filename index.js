@@ -64,18 +64,21 @@ setInterval(async () => {
             for (let i = 0; i < stats.collections; i++) {
                 let collect = db.collection(col[i].s.namespace.collection);
                 const entries = collect.find({});
+                const oneElement = collect.findOne({});
                 if (!ethers.utils.isAddress(col[i].s.namespace.collection)) return console.log("Not a contract address")
-                alchemy.nft.getFloorPrice(col[i].s.namespace.collection).then(async (d) => {
-                    entries.forEach(item => {
-                        console.log(item)
-                        console.log(d.openSea.floorPrice + " " + col[i].s.namespace.collection + " Done at: " + d.openSea.retrievedAt + " Change: " + item.change)
-                        if (d.openSea.floorPrice - parseFloat(item.currentPrice + '') > parseFloat((item.change))) {
-                            console.log(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of +${item.change} ETH. The current floor price is now ${d.openSea.floorPrice}`);
-                            col[i].deleteOne({ slug: item.slug,collectionName: item.collectionName, userID: item.userID, change: item.change, currentPrice: item.currentPrice });
-                        } else if (d.openSea.floorPrice - parseFloat(item.currentPrice + '') < parseFloat((item.change)) * -1.0) {
-                            console.log(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.change} ETH. The current floor price is now ${d.openSea.floorPrice}`);
-                            col[i].deleteOne({ slug: item.slug,collectionName: item.collectionName, userID: item.userID, change: item.change, currentPrice: item.currentPrice });
-                        }
+                oneElement.then(dbslug => {
+                    axios.get(`https://api.opensea.io/api/v1/collection/${dbslug.slug}`).then(async(res) => {
+                        entries.forEach(item => {
+                            console.log(item)
+                            console.log(res.data.collection.stats.floor_price + " " + col[i].s.namespace.collection + " Done at: " + d.openSea.retrievedAt + " Change: " + item.change)
+                            if (res.data.collection.stats.floor_price - parseFloat(item.currentPrice + '') > parseFloat((item.change))) {
+                                console.log(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of +${item.change} ETH. The current floor price is now ${res.data.collection.stats.floor_price}`);
+                                col[i].deleteOne({ slug: item.slug,collectionName: item.collectionName, userID: item.userID, change: item.change, currentPrice: item.currentPrice });
+                            } else if (res.data.collection.stats.floor_price - parseFloat(item.currentPrice + '') < parseFloat((item.change)) * -1.0) {
+                                console.log(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.change} ETH. The current floor price is now ${res.data.collection.stats.floor_price}`);
+                                col[i].deleteOne({ slug: item.slug,collectionName: item.collectionName, userID: item.userID, change: item.change, currentPrice: item.currentPrice });
+                            }
+                        })
                     })
                 })
             }

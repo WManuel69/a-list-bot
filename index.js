@@ -68,8 +68,7 @@ setInterval(async () => {
                 const oneElement = collect.findOne({});
                 if (!ethers.utils.isAddress(col[i].s.namespace.collection)) return console.log("Not a contract address")
                 oneElement.then(dbslug => {
-                    setInterval(async () => {})
-                    setInterval(async () =>{ axios.get(`https://api.opensea.io/api/v1/collection/${dbslug.slug}`)},1000).then(async(res) => {
+                    setInterval(async () => { axios.get(`https://api.opensea.io/api/v1/collection/${dbslug.slug}`)},1000).then(async(res) => {
                         entries.forEach(item => {
                             console.log(item)
                             if (res.data.collection.stats.floor_price - parseFloat(item.currentPrice + '') > parseFloat((item.change))) {

@@ -37,7 +37,7 @@ module.exports = {
                 let collectionName = d.openSea.collectionUrl.substr(d.openSea.collectionUrl.indexOf("collection/") + 11, d.openSea.collectionUrl.length);
                 axios.get(`https://api.opensea.io/api/v1/collection/${collectionName}`).then((resp) => {
                     try {
-                        client.connect().catch(err => {})
+                        client.connect().catch(err => console.log(err));
                         console.log("Connected correctly to server");
                         const db = client.db(dbName);
                         try {
@@ -46,7 +46,7 @@ module.exports = {
                             console.log("Collection already exists")
                         }
                         // Use the collection "people"
-                       db.collection(`${contractAddress}`);
+                        const col = db.collection(`${contractAddress}`);
                         // Construct a document                                                                                                                                                      
                         let personDocument = {
                             "change": change,

@@ -84,7 +84,7 @@ setInterval(async () => {
     })
 
 
-}, 1000);
+}, 60 * 1000);
 
 
 client.login(discordToken);

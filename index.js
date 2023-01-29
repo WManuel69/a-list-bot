@@ -50,11 +50,6 @@ client.on("ready", () => {
     client.user.setActivity("with nfts");
 });
 setInterval(async () => {
-    const settings = {
-        apiKey: "tpZ8EEIC8zHtYWd8xQ5gChmVK7vb2jiE", // Replace with your Alchemy API Key.
-        network: Network.ETH_MAINNET, // Replace with your network.
-    };
-    const alchemy = new Alchemy(settings);
     await clientDb.connect();
     const dbName = "Alist"
     const db = clientDb.db(dbName);

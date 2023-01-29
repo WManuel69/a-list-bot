@@ -12,7 +12,7 @@ module.exports = {
 	async execute(interaction) {
 		const dbName = "Alist"
         try {
-            client.connect();
+            await client.connect();
             const db = client.db(dbName);
                                                                                                                                                                        
             let embed = new EmbedBuilder()

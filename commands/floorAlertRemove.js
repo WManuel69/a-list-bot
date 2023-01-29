@@ -22,7 +22,7 @@ module.exports = {
         const collectionName = interaction.options.get('collection').value;
 		const change = interaction.options.get('change').value;
         try {
-            client.connect();
+            await client.connect();
             const db = client.db(dbName);
             db.stats().then(stats => {
                 db.collections().then(col => {

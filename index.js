@@ -64,7 +64,7 @@ setInterval(async () => {
                 let collect = db.collection(col[i].s.namespace.collection);
                 collect.countDocuments().then(p => {
                     if (p == 0) {
-                    db.removeCollection(col[i].s.namespace.collection);
+                    db.dropCollection(col[i].s.namespace.collection);
                     console.log("No documents in collection");
                     return;
                     }

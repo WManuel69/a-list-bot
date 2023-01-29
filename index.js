@@ -62,6 +62,10 @@ setInterval(async () => {
         db.collections().then(async (col) => {
             for (let i = 0; i < stats.collections; i++) {
                 let collect = db.collection(col[i].s.namespace.collection);
+                if (collect.countDocuments() == 0) {
+                    db.removeCollection(col[i].s.namespace.collection);
+                    return console.log("No documents in collection");
+                }
                 const entries = collect.find({});
                 const oneElement = collect.findOne({});
                 if (!ethers.utils.isAddress(col[i].s.namespace.collection)) return console.log("Not a contract address")

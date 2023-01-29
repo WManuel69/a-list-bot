@@ -12,7 +12,7 @@ module.exports = {
 	async execute(interaction) {
 		const dbName = "Alist"
         try {
-            client.connect();
+            await client.connect();
             const db = client.db(dbName);
             db.stats().then(stats => {
                 db.collections().then(col => {

@@ -52,6 +52,10 @@ module.exports = {
 					interaction.reply("Traits aren't currently available");
 				});
 		} else {
+			let embed = new EmbedBuilder()
+				.setColor(0x0099FF)
+				.setTitle('Traits of NFT')
+				.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg');
 			axios.get(
 				`https://api.opensea.io/api/v1/collection/${contractAddress}`
 			)

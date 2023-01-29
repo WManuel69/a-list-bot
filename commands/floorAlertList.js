@@ -35,6 +35,7 @@ module.exports = {
             
         } catch (err) {
             interaction.reply("Error occurred, try again");
+		console.log(err);
             
         }
     

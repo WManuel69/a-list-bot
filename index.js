@@ -70,10 +70,10 @@ setInterval(async () => {
                         entries.forEach(item => {
                             console.log(item)
                             if (res.data.collection.stats.floor_price - parseFloat(item.currentPrice + '') > parseFloat((item.change))) {
-                                console.log(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of +${item.change} ETH. The current floor price is now ${res.data.collection.stats.floor_price}`);
+                                client.channels.cache.get("1063794467649359923").send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of +${item.change} ETH. The current floor price is now ${res.data.collection.stats.floor_price}`);
                                 col[i].deleteOne({ slug: item.slug,collectionName: item.collectionName, userID: item.userID, change: item.change, currentPrice: item.currentPrice });
                             } else if (res.data.collection.stats.floor_price - parseFloat(item.currentPrice + '') < parseFloat((item.change)) * -1.0) {
-                                console.log(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.change} ETH. The current floor price is now ${res.data.collection.stats.floor_price}`);
+                                client.channels.cache.get("1063794467649359923").send(`<@${item.userID}> Target price for the collection ${item.collectionName} has been reached with change of -${item.change} ETH. The current floor price is now ${res.data.collection.stats.floor_price}`);
                                 col[i].deleteOne({ slug: item.slug,collectionName: item.collectionName, userID: item.userID, change: item.change, currentPrice: item.currentPrice });
                             }
                         })

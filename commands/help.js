@@ -4,7 +4,7 @@ const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashComman
 module.exports = {
 	data: new SlashCommandBuilder()
   		.setName('help')
-  		.setDescription('See the floor price for any project.'),
+  		.setDescription('List all commands'),
 	async execute(interaction) {
 		const embed = new EmbedBuilder()
 		.setColor(0x0099FF)
@@ -21,7 +21,7 @@ module.exports = {
 			{ name: "/add_collection", value: "Add collection to watchlist andbe pinged when it falls below/exceeds threshold. " },
 			{ name: "/list", value: "Prints your watchlist" },
 			{ name: "/remove", value: "Removes from your watchlist. Input the name of the collection by typing exactly the same in your watchlist" },
-			{ name: "/purge", value: "Removes all collections from your watchlist" },
+			{ name: "/purge", value: "Removes all collections from your watchlist" }
 		);
 		await interaction.reply({ embeds: [embed] });
 	},

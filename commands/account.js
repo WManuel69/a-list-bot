@@ -14,7 +14,7 @@ module.exports = {
 
 		
 		if (address.length != 42 && !address.endsWith(".eth")) {
-			await interaction.reply("Wrong address given")
+			await interaction.reply("Wrong address given", { ephemeral: true})
 			return
 		}
 		
@@ -40,7 +40,7 @@ module.exports = {
 			balance = await alchemy.core.getBalance(address, 'latest');
 			balance = Utils.formatEther(balance);
 		} catch (error) {
-			await interaction.reply("ENS does not exist")
+			await interaction.reply({ content: "ENS does not exist",  ephemeral: true})
 			return;
 		}
 
@@ -53,7 +53,7 @@ module.exports = {
 			.setTitle(`Balance of ${output_address}`)
 			.setDescription(`${output_balance} ETH`)
 			.setThumbnail('https://cdn.discordapp.com/attachments/1059490759994249267/1062655683557855342/JPG-04.jpg')
-		await interaction.reply({ embeds: [embed] });
+		await interaction.reply({ embeds: [embed], ephemeral: true });
 	
 	},
 }

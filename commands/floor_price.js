@@ -9,7 +9,7 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('input')
 				.setDescription('Contract address or URL name').setRequired(true))
-		,
+	,
 	async execute(interaction) {
 		const input = interaction.options.get("input").value;
 		if (input.startsWith("0x") && input.length == 42) {
@@ -21,7 +21,7 @@ module.exports = {
 			const alchemy = new Alchemy(settings);
 
 			alchemy.nft.getFloorPrice(input).then((d) => {
-				let collectionName = d.openSea.collectionUrl.substr(d.openSea.collectionUrl.indexOf("collection/")+11,d.openSea.collectionUrl.length);
+				let collectionName = d.openSea.collectionUrl.substr(d.openSea.collectionUrl.indexOf("collection/") + 11, d.openSea.collectionUrl.length);
 				axios.get(`https://api.opensea.io/api/v1/collection/${collectionName}`).then((resp) => {
 					const embed = new EmbedBuilder()
 						.setColor(0x0099FF)
@@ -30,8 +30,9 @@ module.exports = {
 						.addFields(
 							{ name: `${resp.data.collection.primary_asset_contracts[0].name}`, value: `${d.openSea.floorPrice}Ξ` }
 						);
-					interaction.reply({ embeds: [embed] });}).catch((err) => interaction.reply("Wrong contract address"));
-			}).catch((err) => interaction.reply("Wrong contract address"));
+					interaction.reply({ embeds: [embed], ephemeral: true });
+				}).catch((err) => interaction.reply({ content: "Wrong contract address",  ephemeral: true }));
+			}).catch((err) => interaction.reply({ content: "Wrong contract address",  ephemeral: true }));
 		} else {
 			try {
 				axios.get(`https://api.opensea.io/api/v1/collection/${input}`)
@@ -44,15 +45,15 @@ module.exports = {
 							.addFields(
 								{ name: `${res.data.collection.primary_asset_contracts[0].name}`, value: `${res.data.collection.stats.floor_price}Ξ` }
 							);
-						interaction.reply({ embeds: [embed] });
+						interaction.reply({ embeds: [embed], ephemeral: true });
 						return;
 					})
 					.catch((err) => {
 						interaction.reply(
-							"Collection does not exist. Try again, otherwise use contract address");
+							{ content: "Collection does not exist. Try again, otherwise use contract address", ephemeral: true});
 					});
 			} catch (error) {
-				await interaction.reply("Collection does not exist. Try again, otherwise use contract address")
+				await interaction.reply({ content: "Collection does not exist. Try again, otherwise use contract address", ephemeral: true})
 				return;
 			}
 

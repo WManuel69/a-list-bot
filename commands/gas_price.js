@@ -16,6 +16,6 @@ module.exports = {
 					{ name: 'Normal', value: response.data.result.ProposeGasPrice + " Gwei", inline: true },
 					{ name: 'Fast', value: response.data.result.FastGasPrice + " Gwei", inline: true },
 				);
-				interaction.reply({ embeds: [embed] })})
+				interaction.reply({ embeds: [embed], ephemeral: true })})
 	}
 }

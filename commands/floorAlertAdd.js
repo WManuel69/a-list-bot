@@ -55,7 +55,7 @@ module.exports = {
                             "currentPrice": resp.data.collection.stats.floor_price,
                             "slug": collectionName
                         }
-                        col.insertOne(personDocument).catch(err =>{
+                        col.insertOne(personDocument).catch(err => {
                             console.log(err)
                         })
 
@@ -63,15 +63,15 @@ module.exports = {
                         console.log("Collection already existsss")
                     } finally {
                         client.close();
-                        interaction.reply("Collection added!");
+                        interaction.reply({ content: "Collection added!", ephemeral: true });
                     }
                 }).catch((err) => {
                     console.log(`Collection already exists...ss.`)
-                    interaction.reply("Wrong contract address")
+                    interaction.reply({ content: "Wrong contract address", ephemeral: true })
                 });
             }).catch((err) => {
                 console.log(`Collection already exists...`)
-                interaction.reply("Wrong contract address")
+                interaction.reply({ content: "Wrong contract address", ephemeral: true })
             });
         } else {
             try {
@@ -101,23 +101,23 @@ module.exports = {
                             col.insertOne(personDocument);
 
                         } catch (err) {
-                            interaction.reply("error occurred");
+                            interaction.reply({ content: "error occurred",  ephemeral: true });
                             return;
                         }
 
                         finally {
                             client.close();
-                            interaction.reply("Collection added!");
+                            interaction.reply({ content: "Collection added!", ephemeral: true });
                         }
 
 
                     })
                     .catch((err) => {
                         interaction.reply(
-                            "Collection does not exist. Try again, otherwise use contract address");
+                            { content: "Collection does not exist. Try again, otherwise use contract address",  ephemeral: true });
                     });
             } catch (error) {
-                await interaction.reply("Collection does not exist. Try again, otherwise use contract address")
+                await interaction.reply({ content: "Collection does not exist. Try again, otherwise use contract address",  ephemeral: true })
                 return;
             }
 

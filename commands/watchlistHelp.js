@@ -16,7 +16,7 @@ module.exports = {
 			{ name: "/remove", value: "Removes from your watchlist. Input the name of the collection by typing exactly the same in your watchlist" },
 			{ name: "/purge", value: "Removes all collections from your watchlist" }
 		);
-		await interaction.reply({ embeds: [embed] });
+		await interaction.reply({ embeds: [embed] , ephemeral: true});
 	}
 };
   

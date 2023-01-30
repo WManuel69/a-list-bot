@@ -17,8 +17,12 @@ module.exports = {
 			{ name: "/project_volume", value: "Check project volume." },
 			{ name: "/project_trait", value: "Check token traits from user input and rank." },
 			{ name: "/floor_price", value: "Check project floor price." },
+			{ name: "/viewwallets", value: "See which wallets are being used for the profit bot." },
+			{ name: "/addwallet", value: "Add a wallets to the profit bot." },
+			{ name: "/deletewallet", value: "Remove a wallets from the profit bot." },
+			{ name: "/profits", value: "Make the profit bot show you your profits." },
 		);
-		await interaction.reply({ embeds: [embed] });
+		await interaction.reply({ embeds: [embed], ephemeral: true });
 	}
 };
   

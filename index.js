@@ -23,7 +23,7 @@ for (const file of commandFiles) {
         commands.push(command.data.toJSON());
         client.commands.set(command.data.name, command);
     } else {
-        console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+        console.log(`[WARNING] The command at ${filePath} is msissing a required "data" or "execute" property.`);
     }
 }
 

@@ -3,7 +3,7 @@ const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashComman
 
 module.exports = {
 	data: new SlashCommandBuilder()
-  		.setName('help')
+  		.setName('help_botcommands')
   		.setDescription('List all commands'),
 	async execute(interaction) {
 		const embed = new EmbedBuilder()
@@ -15,15 +15,10 @@ module.exports = {
 			{ name: "/gas_price", value: "See the current gas prices." },
 			{ name: "/project_info", value: "Check info about project." },
 			{ name: "/project_volume", value: "Check project volume." },
-			{ name: "/project_trait", value: "Check token traits from user input." },
-			{ name: "", value: "" },
-			{ name: "Floor Alerts", value: "" },
-			{ name: "/add_collection", value: "Add collection to watchlist andbe pinged when it falls below/exceeds threshold. " },
-			{ name: "/list", value: "Prints your watchlist" },
-			{ name: "/remove", value: "Removes from your watchlist. Input the name of the collection by typing exactly the same in your watchlist" },
-			{ name: "/purge", value: "Removes all collections from your watchlist" }
+			{ name: "/project_trait", value: "Check token traits from user input and rank." },
+			{ name: "/floorprice", value: "Check project floor price." },
 		);
 		await interaction.reply({ embeds: [embed] });
-	},
+	}
 };
   

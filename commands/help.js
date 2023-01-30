@@ -16,7 +16,7 @@ module.exports = {
 			{ name: "/project_info", value: "Check info about project." },
 			{ name: "/project_volume", value: "Check project volume." },
 			{ name: "/project_trait", value: "Check token traits from user input and rank." },
-			{ name: "/floorprice", value: "Check project floor price." },
+			{ name: "/floor_price", value: "Check project floor price." },
 		);
 		await interaction.reply({ embeds: [embed] });
 	}

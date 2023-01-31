@@ -21,6 +21,10 @@ module.exports = {
 			{ name: "/addwallet", value: "Add a wallets to the profit bot." },
 			{ name: "/deletewallet", value: "Remove a wallets from the profit bot." },
 			{ name: "/profits", value: "Make the profit bot show you your profits." },
+			{ name: "/add_collection", value: "Add collection to watchlist andbe pinged when it falls below/exceeds threshold. " },
+			{ name: "/list", value: "Prints your watchlist" },
+			{ name: "/remove", value: "Removes from your watchlist. Input the name of the collection by typing exactly the same in your watchlist" },
+			{ name: "/purge", value: "Removes all collections from your watchlist" }
 		);
 		await interaction.reply({ embeds: [embed], ephemeral: true });
 	}

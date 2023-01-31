@@ -18,13 +18,17 @@
   "homepage": "https://github.com/0xManuel/a-list-bot#readme",
   "dependencies": {
     "alchemy-sdk": "^2.3.0",
+    "api": "^5.0.7",
     "axios": "^1.2.2",
     "better-sqlite3": "^8.0.1",
     "discord.js": "^14.7.1",
     "ethers": "^5.7.2",
     "fs": "^0.0.1-security",
+    "jimp": "^0.16.2",
     "mongodb": "^4.13.0",
     "path": "^0.12.7",
-    "quick.db": "^9.0.8"
+    "quick.db": "^9.0.8",
+    "request": "^2.88.2",
+    "sharp": "^0.31.3"
   }
 }

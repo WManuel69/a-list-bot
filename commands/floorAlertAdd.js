@@ -37,7 +37,7 @@ module.exports = {
                 let collectionName = d.openSea.collectionUrl.substr(d.openSea.collectionUrl.indexOf("collection/") + 11, d.openSea.collectionUrl.length);
                 axios.get(`https://api.opensea.io/api/v1/collection/${collectionName}`).then((resp) => {
                     try {
-                        client.connect().catch(err => console.log(err));
+                        client.connect().then(p => {
                         console.log("Connected correctly to server");
                         const db = client.db(dbName);
                         try {
@@ -58,6 +58,8 @@ module.exports = {
                         col.insertOne(personDocument).catch(err => {
                             console.log(err)
                         })
+                        }).catch(err => console.log(err));
+                        
 
                     } catch (err) {
                         console.log("Collection already existsss")

@@ -1,7 +1,7 @@
 const { Client, Collection, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder, channelLink, EmbedBuilder, SharedNameAndDescription } = require('discord.js');
 const { default: axios } = require("axios");
 const { Network, Alchemy } = require("alchemy-sdk");
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb').MongoClient;
 const url = "mongodb+srv://doadmin:mZXBV7k3z24y8509@db-mongodb-ams3-14998-ce0deaf1.mongo.ondigitalocean.com/admin?authSource=admin&replicaSet=db-mongodb-ams3-14998&tls=true";
 const client = new MongoClient(url);
 
@@ -37,7 +37,7 @@ module.exports = {
                 let collectionName = d.openSea.collectionUrl.substr(d.openSea.collectionUrl.indexOf("collection/") + 11, d.openSea.collectionUrl.length);
                 axios.get(`https://api.opensea.io/api/v1/collection/${collectionName}`).then((resp) => {
                     try {
-                        client.connect().then(p => {
+                        MongoClient.connect(url, { useUnifiedTopology: true }).then((client) => {
                         console.log("Connected correctly to server");
                         const db = client.db(dbName);
                         try {
@@ -58,9 +58,7 @@ module.exports = {
                         col.insertOne(personDocument).catch(err => {
                             console.log(err)
                         })
-                        }).catch(err => console.log(err));
-                        
-
+                        })
                     } catch (err) {
                         console.log("Collection already existsss")
                     } finally {
